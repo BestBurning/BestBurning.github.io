@@ -1,0 +1,52 @@
+name: Hexo-CI
+
+on:
+  push:
+    branches:
+      - hexo
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: hexo
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+      - name: Deploy Key Config
+        env:
+          ACTION_DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: Git Config  
+        run: |
+          git config --global user.email "zhushuai026@gmail.com"
+          git config --global user.name "Shea"
+      - name: Sed
+        run: |
+          sed -i "s/BD_TOKEN/${BD_TOKEN}/g" ./_config.yml
+      - name: Install
+        run: |
+          npm install hexo-cli -g
+          npm install hexo-deployer-git --save
+          npm install
+      - name: Hexo Deploy
+        run: |
+          hexo clean
+          hexo generate
+          hexo deploy
+      - name: COS deploy
+        uses: TencentCloud/cos-action@v1
+        with:
+          secret_id: ${{ secrets.TENCENT_CLOUD_SECRET_ID }}
+          secret_key: ${{ secrets.TENCENT_CLOUD_SECRET_KEY }}
+          cos_bucket: ${{ secrets.COS_BUCKET }}
+          cos_region: ${{ secrets.COS_REGION }}
+          local_path: public
+          remote_path: /
+          clean: true
