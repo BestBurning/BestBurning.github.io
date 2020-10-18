@@ -32,7 +32,6 @@ jobs:
       - name: Sed
         run: |
           sed -i "s/BD_TOKEN/${{secrets.BD_TOKEN}}/g" ./_config.yml
-          cat ./_config.yml
       - name: Install
         run: |
           npm install hexo-cli -g
