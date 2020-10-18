@@ -52,6 +52,8 @@ jobs:
           local_path: public
           remote_path: /
           clean: true
+      - name: Wait
+        run: sleep 60
       - name: Refresh CDN
         uses: keithnull/tencent-cloud-cdn-purge-cache@v1.0
         env:

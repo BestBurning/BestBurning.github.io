@@ -34,4 +34,5 @@ JDK 13 ： switch表达式引入yield、文本块
 JDK 14 ：instanceof模式识别、Records、启用Parallel Scavenge+Serial GC组合、删除CMS GC
 
 ### 源码
-[源码](https://github.com/BestBurning/java-versions)已发布到了Github上，欢迎Star
+
+[源码](https://github.com/BestBurning/java-versions)已发布在Github上，欢迎Star
