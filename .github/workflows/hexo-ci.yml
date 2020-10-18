@@ -55,7 +55,7 @@ jobs:
       - name: Refresh CDN
         uses: keithnull/tencent-cloud-cdn-purge-cache@v1.0
         env:
-          SECRET_ID: ${{ secrets.SECRET_ID}}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          SECRET_ID: ${{ secrets.TENCENT_CLOUD_SECRET_ID}}
+          SECRET_KEY: ${{ secrets.TENCENT_CLOUD_SECRET_KEY }}
           PATHS: "https://di1shuai.com"
           FLUSH_TYPE: "flush" # optional
