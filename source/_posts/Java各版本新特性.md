@@ -27,8 +27,8 @@ JDK 10 ： 局部变量的类型推断
 
 **JDK 11** ： ZGC的引入、Epsilon GC
 
-JDK 12： switch表达式、Shenandoah GC、增强GC
+JDK 12 ： switch表达式、Shenandoah GC、增强GC
 
-JDK 13： switch表达式引入yield、文本块
+JDK 13 ： switch表达式引入yield、文本块
 
 JDK 14 ：instanceof模式识别、Records、启用Parallel Scavenge+Serial GC组合、删除CMS GC
