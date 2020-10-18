@@ -52,3 +52,10 @@ jobs:
           local_path: public
           remote_path: /
           clean: true
+      - name: Refresh CDN
+        uses: keithnull/tencent-cloud-cdn-purge-cache@v1.0
+        env:
+          SECRET_ID: ${{ secrets.SECRET_ID}}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          PATHS: "https://di1shuai.com"
+          FLUSH_TYPE: "flush" # optional
