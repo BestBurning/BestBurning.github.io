@@ -4,4 +4,5 @@ comments: false
 layout: timeline
 
 ---
-![当前架构](https://i0.hdslb.com/bfs/article/e89b7f8a1c59c58a56c406a29fcbe43b1e74ae4d.png)
+
+![当前架构.PNG](https://wx2.sinaimg.cn/large/87b7d2fcgy1gjtu9xa64mj21b90u044w.jpg)
