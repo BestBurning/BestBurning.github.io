@@ -5,4 +5,4 @@ layout: timeline
 
 ---
 
-![当前架构](https://wx1.sinaimg.cn/large/87b7d2fcgy1gjtu9xa64mj21b90u044w.jpg)
+![当前架构](https://images.di1shuai.com/Fja1ysRZkPJtrJRyoP0PIF0_-pts)
