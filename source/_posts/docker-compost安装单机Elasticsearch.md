@@ -78,7 +78,7 @@ docker-compose up -d
 
 ### 将容器内的`config`配置文件复制到需要挂载的目录
 ```
-docker cp -r elasticsearch7.9.3:/usr/share/elasticsearch/config ~/top/data/elasticsearch/
+docker cp elasticsearch7.9.3:/usr/share/elasticsearch/config ~/top/data/elasticsearch/
 
 ```
 
@@ -107,3 +107,15 @@ docker-compose up -d
 
 Elasticsearch: 访问`9200`端口
 Kibana: 访问`5601`端口
+
+
+### 安装`ik`分词插件
+```
+docker-compose exec elasticsearch elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.9.3/elasticsearch-analysis-ik-7.9.3.zip
+
+//然后要重启es容器
+docker-compose restart elasticsearch
+```
+
+
+
