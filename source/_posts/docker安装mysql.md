@@ -9,6 +9,7 @@ categories:
 originContent: |-
   使用Docker安装MySQL8.0，并修改字符集以及用户授权
 toc: false
+keywords: Docker,MySQL,8.0,字符集
 date: 2020-02-20 08:40:51
 ---
 使用Docker安装MySQL8.0，并修改字符集以及用户授权
@@ -40,6 +41,18 @@ docker run \
 ```
 docker exec -it mysql bash
 ```
+- 更换国内源,以`Debian`-`buster`为例
+```
+echo "deb http://mirrors.aliyun.com/debian/ buster main non-free contrib" >> /etc/apt/sources.list
+echo "deb-src http://mirrors.aliyun.com/debian/ buster main non-free contrib" >> /etc/apt/sources.list
+echo "deb http://mirrors.aliyun.com/debian-security buster/updates main" >> /etc/apt/sources.list
+echo "deb-src http://mirrors.aliyun.com/debian-security buster/updates main" >> /etc/apt/sources.list
+echo "deb http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib" >> /etc/apt/sources.list
+echo "deb-src http://mirrors.aliyun.com/debian/ buster-updates main non-free contrib" >> /etc/apt/sources.list
+echo "deb http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib" >> /etc/apt/sources.list
+echo "deb-src http://mirrors.aliyun.com/debian/ buster-backports main non-free contrib" >> /etc/apt/sources.list
+```
+
 - 安装`vim`
 ```
 apt-get update && apt-get install vim -y
