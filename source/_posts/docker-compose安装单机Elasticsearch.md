@@ -1,5 +1,5 @@
 ---
-title: docker-compost安装单机Elasticsearch
+title: docker-compose安装单机Elasticsearch
 tags: 
 - Elasticsearch
 - Docker
