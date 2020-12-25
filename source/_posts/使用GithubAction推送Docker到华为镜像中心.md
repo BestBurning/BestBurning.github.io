@@ -35,11 +35,11 @@ FROM openjdk:11-jre
 MAINTAINER Shea<zhushuai026@gmail.com>
 
 VOLUME /tmp
-EXPOSE 8081
+EXPOSE 8080
 
 ARG JAR_FILE
 ADD target/${JAR_FILE} /root/app.jar
-ENTRYPOINT ["java", "-jar", "/root/app.jar"]
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /root/app.jar"]
 ```
 
 ### `Pom`配置
@@ -138,7 +138,7 @@ on:
 jobs:
   build:
     env:
-      DOCKER_PROJECT: cmb-question-bank-api
+      DOCKER_PROJECT: cmb-question-bank-api 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -168,9 +168,10 @@ jobs:
           docker images
           docker push $DOCKER_IMAGE_NAME:$DOCKER_VERSION
           docker push $DOCKER_IMAGE_NAME:latest
+
   pull-docker:
     env:
-      DOCKER_PROJECT: cmb-question-bank-api
+      DOCKER_PROJECT: cmb-question-bank-api   
     needs: [build]
     name: Pull Docker
     runs-on: ubuntu-latest
@@ -192,7 +193,8 @@ jobs:
             docker rm -f $(docker ps -a --filter ancestor=$DOCKER_IMAGE_NAME:latest -q)
             docker rmi -f $(docker images  $DOCKER_IMAGE_NAME:latest -q)
             docker pull $DOCKER_IMAGE_NAME:latest
-            docker run --name $DOCKER_PROJECT -p 8081:8081 -d $DOCKER_IMAGE_NAME:latest
+            cd /opt/apps/
+            docker-compose up -d
 ```
 
 其中`DOCKER_PROJECT: cmb-question-bank-api`替换为你自己的项目名
