@@ -2,11 +2,11 @@
 title: Kafka——Rebalance过程
 comments: true
 tags: 
-- kafka
+- Kafka
 - BigData
 categories: 
 - technology
-keywords: kafka,Rebalance,过程
+keywords: Kafka,Rebalance,过程
 toc: true
 date: 2020-07-08 15:35:05
 ---

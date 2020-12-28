@@ -1,10 +1,10 @@
 ---
-title: kafka常用操作(不定期更新)
+title: Kafka常用操作(不定期更新)
 comments: true
 date: 2016-10-28
-keywords: kafka,操作
+keywords: Kafka,操作
 tags: 
-- kafka
+- Kafka
 - BigData
 categories: 
 - technology

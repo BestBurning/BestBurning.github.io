@@ -2,11 +2,11 @@
 title: Kafka——分区策略
 comments: true
 tags: 
-- kafka
+- Kafka
 - BigData
 categories: 
 - technology
-keywords: kafka,分区策略,Partitioner,Assignor
+keywords: Kafka,分区策略,Partitioner,Assignor
 toc: true
 date: 2020-07-09 15:50:04
 ---
