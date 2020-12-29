@@ -1,6 +1,6 @@
 ---
 title: 开发go-flutter插件
-tags: flutter
+tags: Flutter
 comments: true
 categories: technology
 originContent: 

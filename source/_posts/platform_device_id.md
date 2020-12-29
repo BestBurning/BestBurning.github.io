@@ -2,7 +2,7 @@
 title: platform_device_id
 tags: 
   - go-flutter-plugin
-  - flutter
+  - Flutter
 comments: true
 categories: 
   - products

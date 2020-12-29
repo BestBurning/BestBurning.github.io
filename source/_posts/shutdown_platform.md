@@ -2,7 +2,7 @@
 title: shutdown_platform
 tags: 
   - go-flutter-plugin
-  - flutter
+  - Flutter
 comments: true
 categories: 
   - products
