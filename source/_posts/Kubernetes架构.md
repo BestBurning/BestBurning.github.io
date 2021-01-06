@@ -2,7 +2,7 @@
 title: Kubernetes架构
 comments: true
 tags: 
-- kubernetes
+- Kubernetes
 categories: 
 - technology
 keywords: kubernetes,架构
