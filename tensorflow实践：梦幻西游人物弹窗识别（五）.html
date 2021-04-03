@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="正走在通向编程、艺术、摄影、剪辑、写作、运动的路上的Full Stacker,Stay Cool!!!"><meta name="google-site-verification" content="q2XooBg_4_mx5-YvLlJvWzU3gxn_9nUvFpLz2_pU584"><meta name="keywords" content="tensorflow,梦幻西游,弹窗识别,python,自动点击,图像识别,持续学习"><title>tensorflow实践：梦幻西游人物弹窗识别（五） - 第一帅</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.1"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-163115360-1','auto');ga('send','pageview');
+</script><script>(function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">tensorflow实践：梦幻西游人物弹窗识别（五）</h1><a id="logo" href="/.">第一帅</a><p class="description">Shea的博客</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/tags/"><i class="fa fa-tag"> 标签</i></a><a href="/products/"><i class="fa fa-cubes"> 作品</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/guestbook/"><i class="fa fa-comments"> 留言</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">tensorflow实践：梦幻西游人物弹窗识别（五）</h1><div class="post-meta">2020-03-21<span> | </span><span class="category"><a href="/categories/technology/">technology</a><span>  </span></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" data-disqus-identifier="tensorflow实践：梦幻西游人物弹窗识别（五）.html" href="/tensorflow实践：梦幻西游人物弹窗识别（五）.html#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#预分类"><span class="toc-number">1.</span> <span class="toc-text">预分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分类"><span class="toc-number">2.</span> <span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动"><span class="toc-number">3.</span> <span class="toc-text">移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练"><span class="toc-number">4.</span> <span class="toc-text">训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合"><span class="toc-number">5.</span> <span class="toc-text">组合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回顾"><span class="toc-number">6.</span> <span class="toc-text">回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#声明"><span class="toc-number">7.</span> <span class="toc-text">声明</span></a></li></ol></div></div><div class="post-content"><p>为什么么说我们的目标是<strong>基本</strong>完成呢？<br>因为它不会<strong>进化</strong>呀！</p>
+<p><img src="http://images.di1shuai.com/FltgSUT4XbTNajlHvvq4FRgtNHad" alt></p>
+<p>如果我们拥有<strong>全量</strong>的梦幻西游人物<strong>图库</strong>，那自然预测的准确率很高<br>很可惜，我们<strong>没有</strong><br>所以只能在日常的跑镖或者打怪中去不断的<strong>积累</strong>图库，让神经网络不断的训练<strong>学习</strong>，以将<strong>准确率</strong>提<strong>高</strong></p>
+<h3 id="预分类"><a href="#预分类" class="headerlink" title="预分类"></a>预分类</h3><p>于是我们按照预测的索引，将图片<strong>分类</strong>并保存，值得注意的是这里的分类并<strong>不</strong>一定<strong>准确</strong>，所以是<strong>预分类</strong></p>
+<p><code>screen.py</code></p>
+<figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line"><span class="meta">###  数据保存</span></span><br><span class="line">def save_data_img(front_index):<span class="type"></span></span><br><span class="line"><span class="type">    for i in range</span>(len(c.crop_4_img_paths)):<span class="type"></span></span><br><span class="line"><span class="type">        save_path </span>= <span class="string">''</span></span><br><span class="line">        <span class="keyword">if</span> i == front_index:<span class="type"></span></span><br><span class="line"><span class="type">            save_path </span>= os.path.join(c.<span class="keyword">new</span><span class="type">_front_img_dir</span>,time_str()+<span class="string">'_'</span>+str(i)+<span class="string">'.jpg'</span>)</span><br><span class="line">        <span class="keyword">else</span>:<span class="type"></span></span><br><span class="line"><span class="type">            save_path </span>= os.path.join(c.<span class="keyword">new</span><span class="type">_others_img_dir</span>,time_str()+<span class="string">'_'</span>+str(i)+<span class="string">'.jpg'</span>)</span><br><span class="line">        shutil.copyfile(c.crop_4_img_paths[i],save_path)</span><br></pre></td></tr></table></figure>
+
+<p><code>main.py</code>在获得预测索引时保存数据</p>
+<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line">min_index = dm.model_predict(c.crop_4_img_paths)</span><br><span class="line">sc.save_dat<span class="built_in">a_img</span>(min_index)</span><br><span class="line"><span class="built_in">target_x ,</span> target_y = sc.find_xy_indesktop(c.crop_4_img_paths[min_index])</span><br></pre></td></tr></table></figure>
+
+<p>路径如下</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">images</span><br><span class="line">  <span class="string">|- data</span></span><br><span class="line">      <span class="string">|- new</span></span><br><span class="line">          <span class="string">|- front</span></span><br><span class="line">               <span class="string">|- xxx.jpg</span></span><br><span class="line">               <span class="string">|- ...</span></span><br><span class="line">          <span class="string">|- others  </span></span><br><span class="line">               <span class="string">|- xxx.jpg</span></span><br><span class="line">               <span class="string">|- ...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>不得不说这一步是<strong>手工</strong>确认，去两个文件夹下确认是否都是正确的，不正确的手工移动到正确目录下<br>于是加入两个<strong>输入确认</strong>以<strong>提醒</strong>不要忘记，等训练<strong>样本</strong>比较<strong>齐全</strong>以后可以改为<strong>自动</strong>分类</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">util.log_title(<span class="string">'图片朝向确认'</span>)</span><br><span class="line"><span class="keyword">confirm</span> = <span class="built_in">input</span>(<span class="keyword">f</span><span class="string">'请确认路径  &#123;os.path.abspath(c.new_front_img_dir)&#125;   下图片朝向均为  &gt; 前 &lt;  : (确认后输入 Y , 输入其他退出) '</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">confirm</span> == <span class="string">'Y'</span> <span class="built_in">or</span> <span class="keyword">confirm</span> == <span class="string">'y'</span>:</span><br><span class="line">    <span class="keyword">confirm</span> = <span class="built_in">input</span>(<span class="keyword">f</span><span class="string">'请确认路径  &#123;os.path.abspath(c.new_others_img_dir)&#125;   下图片朝向均为  &gt; 左 右 后 &lt; : (确认后输入 Y , 输入其他退出)'</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">confirm</span> == <span class="string">'Y'</span> <span class="built_in">or</span> <span class="keyword">confirm</span> == <span class="string">'y'</span>:</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight taggerscript"><table><tr><td class="code"><pre><span class="line">2020-03-21 19:12:12.623765: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll</span><br><span class="line"></span><br><span class="line">--------   图片朝向确认    ----------</span><br><span class="line"></span><br><span class="line">请确认路径  D:<span class="symbol">\g</span>itRepo<span class="symbol">\m</span>hxy<span class="symbol">\i</span>mages<span class="symbol">\d</span>ata<span class="symbol">\n</span>ew<span class="symbol">\f</span>ront   下图片朝向均为  &gt; 前 &lt;  : (确认后输入 Y , 输入其他退出) Y</span><br><span class="line">请确认路径  D:<span class="symbol">\g</span>itRepo<span class="symbol">\m</span>hxy<span class="symbol">\i</span>mages<span class="symbol">\d</span>ata<span class="symbol">\n</span>ew<span class="symbol">\o</span>thers   下图片朝向均为  &gt; 左 右 后 &lt; : (确认后输入 Y , 输入其他退出)</span><br></pre></td></tr></table></figure>
+
+<h3 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h3><p>分类确认后，就可以将<code>new</code>目录下图片移动到训练集<code>train</code>目录中了<br><code>main.py</code></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">sc</span><span class="selector-class">.move_new_to_train</span>()</span><br></pre></td></tr></table></figure>
+
+<p><code>screen.py</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">move_new_to_train</span><span class="params">()</span>:</span></span><br><span class="line">    move_file(c.new_front_img_dir,c.front_img_dir)</span><br><span class="line">    move_file(c.new_others_img_dir,c.others_img_dir)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">move_file</span><span class="params">(src_path,target_path)</span>:</span></span><br><span class="line">    file_list=os.listdir(src_path)</span><br><span class="line">    <span class="keyword">if</span> len(file_list)&gt;<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">for</span> file <span class="keyword">in</span> file_list:</span><br><span class="line">            shutil.move(</span><br><span class="line">                os.path.join(src_path,file),</span><br><span class="line">                os.path.join(target_path,file)</span><br><span class="line">                )   </span><br><span class="line">    print(<span class="string">f'<span class="subst">&#123;src_path&#125;</span> -&gt; <span class="subst">&#123;target_path&#125;</span> 完毕'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p><code>main.py</code></p>
+<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line">dm.<span class="keyword">base</span>()</span><br></pre></td></tr></table></figure>
+
+<p><code>data_model.py</code></p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">def</span> <span class="selector-tag">base</span>():</span><br><span class="line">    <span class="selector-tag">if</span> <span class="selector-tag">count</span>():</span><br><span class="line">        <span class="selector-tag">data_generator</span>()</span><br><span class="line">        <span class="selector-tag">model_summary</span>()</span><br><span class="line">        <span class="selector-tag">model_fit</span>()</span><br><span class="line">        <span class="selector-tag">model_save</span>()</span><br><span class="line">        <span class="selector-tag">return</span> <span class="selector-tag">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h3><p>将之前的步骤组合后<br><code>main.py</code></p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">###  将新图加入训练集 并 训练模型</span><br><span class="line">def move_learn():</span><br><span class="line">    util.log_title(<span class="string">'图片朝向确认'</span>)</span><br><span class="line">    <span class="keyword">confirm</span> = <span class="built_in">input</span>(<span class="keyword">f</span><span class="string">'请确认路径  &#123;os.path.abspath(c.new_front_img_dir)&#125;   下图片朝向均为  &gt; 前 &lt;  : (确认后输入 Y , 输入其他退出) '</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">confirm</span> == <span class="string">'Y'</span> <span class="built_in">or</span> <span class="keyword">confirm</span> == <span class="string">'y'</span>:</span><br><span class="line">        <span class="keyword">confirm</span> = <span class="built_in">input</span>(<span class="keyword">f</span><span class="string">'请确认路径  &#123;os.path.abspath(c.new_others_img_dir)&#125;   下图片朝向均为  &gt; 左 右 后 &lt; : (确认后输入 Y , 输入其他退出)'</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">confirm</span> == <span class="string">'Y'</span> <span class="built_in">or</span> <span class="keyword">confirm</span> == <span class="string">'y'</span>:</span><br><span class="line">            util.log_h1_start(<span class="string">'开始'</span>)</span><br><span class="line">            sc.move_new_to_train()</span><br><span class="line">            dm.base()               </span><br><span class="line">    util.log_h1_end(<span class="string">'结束'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://images.di1shuai.com/FncBRUv0JAJOZVvE2Bpbk79arRRU" alt></p>
+<p>这样的话，每天打完以后，都可以用新的素材让自己变帅一点，哈哈哈哈哈哈</p>
+<hr>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>再来看看我们都经历了什么<br><img src="http://images.di1shuai.com/FuOdQlJmiTzQMbbtZ4vXOraJL6Fp" alt><br>成就感满满!!</p>
+<hr>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>本人无任何商业目的，仅用于学习和娱乐，<a href="https://github.com/BestBurning/mhxy" target="_blank" rel="noopener">源代码</a>采用了<a href="https://opensource.org/licenses/AGPL-3.0" target="_blank" rel="noopener">AGPL3.0</a>开源协议</p>
+<p>本文为博主原创文章，任何人未经过博主同意不得转载</p>
+
+      <script>
+        window.disqusProxy={
+          shortname: 'diyishuai',
+          username: 'di1shuai',
+          server: 'disqus.di1shuai.com',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: 'tensorflow实践：梦幻西游人物弹窗识别（五）.html',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script></div><div class="tags"><a href="/tags/Windows/"><i class="fa fa-tag"></i>Windows</a><a href="/tags/tensorflow/"><i class="fa fa-tag"></i>tensorflow</a><a href="/tags/梦幻西游/"><i class="fa fa-tag"></i>梦幻西游</a></div><div class="post-nav"><a class="pre" href="/各种仓库国内镜像.html">各种仓库国内镜像</a><a class="next" href="/tensorflow实践：梦幻西游人物弹窗识别（四）.html">tensorflow实践：梦幻西游人物弹窗识别（四）</a></div>
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://di1shuai.com/tensorflow实践：梦幻西游人物弹窗识别（五）.html';
+    this.page.identifier = 'tensorflow实践：梦幻西游人物弹窗识别（五）.html';
+    this.page.title = 'tensorflow实践：梦幻西游人物弹窗识别（五）';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//diyishuai.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//diyishuai.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://diyishuai.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="https://di1shuai.com"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/emotion/">emotion</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/products/">products</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/Flink数据转换-Transformation.html">Flink-DataStream-Transformations</a></li><li class="post-list-item"><a class="post-list-link" href="/Kubernetes架构.html">Kubernetes架构</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction推送Docker到华为镜像中心.html">使用GithubAction推送Docker到香港华为镜像中心</a></li><li class="post-list-item"><a class="post-list-link" href="/docker-compose安装单机Elasticsearch.html">docker-compose安装单机Elasticsearch</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction发布Flutter项目.html">使用GithubAction发布Flutter项目-Android</a></li><li class="post-list-item"><a class="post-list-link" href="/招行积分题.html">招行积分题</a></li><li class="post-list-item"><a class="post-list-link" href="/设计模式之行为型.html">设计模式之行为型</a></li><li class="post-list-item"><a class="post-list-link" href="/Java各版本新特性.html">Java各版本新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——分区策略.html">Kafka——分区策略</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——Rebalance过程.html">Kafka——Rebalance过程</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.csdn.net/u012373815" title="Abel的博客(大数据、AI专家)" target="_blank">Abel的博客(大数据、AI专家)</a><ul></ul><a href="https://blog.csdn.net/u010416101" title="Sean的博客(大数据、AI专家)" target="_blank">Sean的博客(大数据、AI专家)</a><ul></ul><a href="https://yo-cwj.com/" title="陈文俊的博客(前端专家)" target="_blank">陈文俊的博客(前端专家)</a><ul></ul><a href="https://www.xilanhua-c7.top" title="西蓝花的博客(未知领域专家)" target="_blank">西蓝花的博客(未知领域专家)</a><ul></ul><a href="https://gaojianchao.github.io/learngit/" title="Alan的博客(AI专家)" target="_blank">Alan的博客(AI专家)</a><ul></ul><a href="https://woj.app" title="虾米的蜗居" target="_blank">虾米的蜗居</a><ul></ul><a href="https://blog.mightyherox.me" title="circlehotarux的博客" target="_blank">circlehotarux的博客</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2016-2021 <a href="/." rel="nofollow">第一帅 </a> |&nbsp;<a rel="nofollow" target="_blank" href="https://beian.miit.gov.cn"> 晋ICP备15004021号-1</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.1" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/love.js"></script><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.1"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.1"></script></div></body></html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="正走在通向编程、艺术、摄影、剪辑、写作、运动的路上的Full Stacker,Stay Cool!!!"><meta name="google-site-verification" content="q2XooBg_4_mx5-YvLlJvWzU3gxn_9nUvFpLz2_pU584"><meta name="keywords" content="Kafka,操作"><title>Kafka常用操作(不定期更新) - 第一帅</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.1"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-163115360-1','auto');ga('send','pageview');
+</script><script>(function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Kafka常用操作(不定期更新)</h1><a id="logo" href="/.">第一帅</a><p class="description">Shea的博客</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/tags/"><i class="fa fa-tag"> 标签</i></a><a href="/products/"><i class="fa fa-cubes"> 作品</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/guestbook/"><i class="fa fa-comments"> 留言</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Kafka常用操作(不定期更新)</h1><div class="post-meta">2016-10-28<span> | </span><span class="category"><a href="/categories/technology/">technology</a><span>  </span></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" data-disqus-identifier="Kafka常用操作.html" href="/Kafka常用操作.html#disqus_thread"></a><div class="post-content"><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p><a href="http://kafka.apache.org/" target="_blank" rel="noopener">kafka官网</a><br>kafka version 2.10<br>所有kafka的操作都是基于kafka2.10包下bin目录下的脚本文件</p>
+<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><ol>
+<li><p>启动zookeeper</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">./zookeeper-server-start.sh</span> <span class="string">../config/zookeeper.properties</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动kafka</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line">./kafka-<span class="keyword">server</span>-start.sh ../config/<span class="keyword">server</span>.properties</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>停止所有kafka server</p>
+<figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line">./kafka-<span class="built_in">server</span>-<span class="keyword">stop</span>.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建topic</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">./kafka-topics.sh</span> <span class="params">--create</span> <span class="params">--topic</span> my-topic <span class="params">--partitions</span> 1 <span class="params">--replication-factor</span> 1 <span class="params">--zookeeper</span> localhost<span class="function">:2181</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看所有topic</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">./kafka-topics.sh</span> <span class="params">--list</span> <span class="params">--zookeeper</span> localhost<span class="function">:2181</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看指定topic信息</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">./kafka-topics.sh</span> <span class="params">--describe</span> <span class="params">--topic</span> my-topic  <span class="params">--zookeeper</span> localhost<span class="function">:2181</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更改topic的配置信息</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">./kafka-topics.sh</span> <span class="params">--alter</span> <span class="params">--topic</span> my-topic <span class="params">--partitions</span> 3 <span class="params">--zookeeper</span> localhost<span class="function">:2181</span></span><br></pre></td></tr></table></figure>
+
+<p> 说明：本操作将my-topic的partitions更改为3个，要求至少启动三个kafka broker（也就是kafka server）</p>
+</li>
+<li><p>删除topic</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">./kafka-topics.sh</span> <span class="params">--delete</span> <span class="params">--topic</span> my-topic <span class="params">--zookeeper</span> localhost<span class="function">:2181</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>producer向某个topic丢数据,然后在命令行内敲数据消费端就能够收到</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">./kafka-console-producer.<span class="keyword">sh</span> --broker-<span class="keyword">list</span>=localhos<span class="variable">t:9092</span>,localhos<span class="variable">t:9093</span>,localhos<span class="variable">t:9094</span> --topic my-topic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>consumer消费某个topic</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">./kafka-console-consumer.sh</span> <span class="params">--topic</span> my-topic <span class="params">--zookeeper</span> localhost<span class="function">:2181</span></span><br></pre></td></tr></table></figure>
+</li>
+<li></li>
+</ol>
+
+      <script>
+        window.disqusProxy={
+          shortname: 'diyishuai',
+          username: 'di1shuai',
+          server: 'disqus.di1shuai.com',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: 'Kafka常用操作.html',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script></div><div class="post-copyright"><script type="text/javascript" src="/js/copyright.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copyright.css"><p><span>本文标题：</span>Kafka常用操作(不定期更新)</p><p><span>文章作者：</span>Shea</p><p><span>原始链接：</span><a href="/Kafka常用操作.html">https://di1shuai.com/Kafka常用操作.html</a><span class="copy-path"><i class="fa fa-clipboard" data-clipboard-text="https://di1shuai.com/Kafka常用操作.html"></i></span></p><p><span>版权声明：</span>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</p></div><br><div class="tags"><a href="/tags/BigData/"><i class="fa fa-tag"></i>BigData</a><a href="/tags/Kafka/"><i class="fa fa-tag"></i>Kafka</a></div><div class="post-nav"><a class="pre" href="/2017我想翻一座山.html">2017我想翻一座山</a><a class="next" href="/一年中秋.html">中秋杂记</a></div>
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://di1shuai.com/Kafka常用操作.html';
+    this.page.identifier = 'Kafka常用操作.html';
+    this.page.title = 'Kafka常用操作(不定期更新)';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//diyishuai.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//diyishuai.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://diyishuai.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="https://di1shuai.com"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/emotion/">emotion</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/products/">products</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/Flink数据转换-Transformation.html">Flink-DataStream-Transformations</a></li><li class="post-list-item"><a class="post-list-link" href="/Kubernetes架构.html">Kubernetes架构</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction推送Docker到华为镜像中心.html">使用GithubAction推送Docker到香港华为镜像中心</a></li><li class="post-list-item"><a class="post-list-link" href="/docker-compose安装单机Elasticsearch.html">docker-compose安装单机Elasticsearch</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction发布Flutter项目.html">使用GithubAction发布Flutter项目-Android</a></li><li class="post-list-item"><a class="post-list-link" href="/招行积分题.html">招行积分题</a></li><li class="post-list-item"><a class="post-list-link" href="/设计模式之行为型.html">设计模式之行为型</a></li><li class="post-list-item"><a class="post-list-link" href="/Java各版本新特性.html">Java各版本新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——分区策略.html">Kafka——分区策略</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——Rebalance过程.html">Kafka——Rebalance过程</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.csdn.net/u012373815" title="Abel的博客(大数据、AI专家)" target="_blank">Abel的博客(大数据、AI专家)</a><ul></ul><a href="https://blog.csdn.net/u010416101" title="Sean的博客(大数据、AI专家)" target="_blank">Sean的博客(大数据、AI专家)</a><ul></ul><a href="https://yo-cwj.com/" title="陈文俊的博客(前端专家)" target="_blank">陈文俊的博客(前端专家)</a><ul></ul><a href="https://www.xilanhua-c7.top" title="西蓝花的博客(未知领域专家)" target="_blank">西蓝花的博客(未知领域专家)</a><ul></ul><a href="https://gaojianchao.github.io/learngit/" title="Alan的博客(AI专家)" target="_blank">Alan的博客(AI专家)</a><ul></ul><a href="https://woj.app" title="虾米的蜗居" target="_blank">虾米的蜗居</a><ul></ul><a href="https://blog.mightyherox.me" title="circlehotarux的博客" target="_blank">circlehotarux的博客</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2016-2021 <a href="/." rel="nofollow">第一帅 </a> |&nbsp;<a rel="nofollow" target="_blank" href="https://beian.miit.gov.cn"> 晋ICP备15004021号-1</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.1" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/love.js"></script><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.1"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.1"></script></div></body></html>

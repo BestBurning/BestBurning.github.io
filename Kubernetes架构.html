@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="正走在通向编程、艺术、摄影、剪辑、写作、运动的路上的Full Stacker,Stay Cool!!!"><meta name="google-site-verification" content="q2XooBg_4_mx5-YvLlJvWzU3gxn_9nUvFpLz2_pU584"><meta name="keywords" content="kubernetes,架构"><title>Kubernetes架构 - 第一帅</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.1"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-163115360-1','auto');ga('send','pageview');
+</script><script>(function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Kubernetes架构</h1><a id="logo" href="/.">第一帅</a><p class="description">Shea的博客</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/tags/"><i class="fa fa-tag"> 标签</i></a><a href="/products/"><i class="fa fa-cubes"> 作品</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/guestbook/"><i class="fa fa-comments"> 留言</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Kubernetes架构</h1><div class="post-meta">2020-12-08<span> | </span><span class="category"><a href="/categories/technology/">technology</a><span>  </span></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" data-disqus-identifier="Kubernetes架构.html" href="/Kubernetes架构.html#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特性"><span class="toc-number">1.1.</span> <span class="toc-text">特性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#架构"><span class="toc-number">2.</span> <span class="toc-text">架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Control-Plane-Components-控制平面组件"><span class="toc-number">2.1.</span> <span class="toc-text">Control Plane Components 控制平面组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#kube-apiserver"><span class="toc-number">2.1.1.</span> <span class="toc-text">kube-apiserver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#etcd"><span class="toc-number">2.1.2.</span> <span class="toc-text">etcd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kube-scheduler"><span class="toc-number">2.1.3.</span> <span class="toc-text">kube-scheduler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kube-controller-manager"><span class="toc-number">2.1.4.</span> <span class="toc-text">kube-controller-manager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cloud-controller-manager"><span class="toc-number">2.1.5.</span> <span class="toc-text">cloud-controller-manager</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-组件"><span class="toc-number">2.2.</span> <span class="toc-text">Node 组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#kubelet"><span class="toc-number">2.2.1.</span> <span class="toc-text">kubelet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kube-proxy"><span class="toc-number">2.2.2.</span> <span class="toc-text">kube-proxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器运行时（Container-Runtime）"><span class="toc-number">2.2.3.</span> <span class="toc-text">容器运行时（Container Runtime）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Addons-插件"><span class="toc-number">2.3.</span> <span class="toc-text">Addons 插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS"><span class="toc-number">2.3.1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-界面（仪表盘）"><span class="toc-number">2.3.2.</span> <span class="toc-text">Web 界面（仪表盘）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器资源监控"><span class="toc-number">2.3.3.</span> <span class="toc-text">容器资源监控</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群层面日志"><span class="toc-number">2.3.4.</span> <span class="toc-text">集群层面日志</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol></div></div><div class="post-content"><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><blockquote>
+<p>Kubernetes 是一个开源的容器编排引擎，用来对容器化应用进行自动化部署、扩缩和管理</p>
+</blockquote>
+<p>K8s → 使容器化应用部署更加简洁和高效</p>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>自动装箱</li>
+<li>自动修复</li>
+<li>水平扩展</li>
+<li>滚动更新</li>
+<li>版本回退</li>
+<li>秘钥和配置管理</li>
+<li>存储编排</li>
+<li>批处理</li>
+</ul>
+<h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><p><img src="https://images.di1shuai.com/kubernetes.jpg" alt></p>
+<p>分布式架构中的 Master - Node 模式</p>
+<h2 id="Control-Plane-Components-控制平面组件"><a href="#Control-Plane-Components-控制平面组件" class="headerlink" title="Control Plane Components 控制平面组件"></a>Control Plane Components 控制平面组件</h2><p>控制平面的组件对集群做全局决策</p>
+<ul>
+<li>调度</li>
+<li>检测和响应集群事件（例如，当不满足部署的 <code>replicas</code> 字段时，启动新的 <a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/" target="_blank" rel="noopener"><code>pod</code></a>）。</li>
+</ul>
+<p>控制平面组件实际上也可以在任何节点上启动，也就是说可以在 <code>Node</code>节点上启动</p>
+<h3 id="kube-apiserver"><a href="#kube-apiserver" class="headerlink" title="kube-apiserver"></a><strong>kube-apiserver</strong></h3><p>集群统一入口</p>
+<h3 id="etcd"><a href="#etcd" class="headerlink" title="etcd"></a><strong>etcd</strong></h3><p>存储系统</p>
+<h3 id="kube-scheduler"><a href="#kube-scheduler" class="headerlink" title="kube-scheduler"></a><strong>kube-scheduler</strong></h3><p>节点调度</p>
+<p>调度决策考虑的因素包括 Pod 的</p>
+<ul>
+<li>资源需求</li>
+<li>硬件/软件/策略约束</li>
+<li>亲和性和反亲和性规范</li>
+<li>数据位置</li>
+<li>工作负载间的干扰</li>
+<li>最后时限</li>
+</ul>
+<h3 id="kube-controller-manager"><a href="#kube-controller-manager" class="headerlink" title="kube-controller-manager"></a><strong>kube-controller-manager</strong></h3><p>处理集群的后台任务</p>
+<p>控制器包括:</p>
+<ul>
+<li>节点控制器（Node Controller）: 负责在节点出现故障时进行通知和响应。</li>
+<li>副本控制器（Replication Controller）: 负责为系统中的每个副本控制器对象维护正确数量的 Pod。</li>
+<li>端点控制器（Endpoints Controller）: 填充端点(Endpoints)对象(即加入 Service 与 Pod)。</li>
+<li>服务帐户和令牌控制器（Service Account &amp; Token Controllers）: 为新的命名空间创建默认帐户和 API 访问令牌.</li>
+</ul>
+<h3 id="cloud-controller-manager"><a href="#cloud-controller-manager" class="headerlink" title="cloud-controller-manager"></a><strong>cloud-controller-manager</strong></h3><p>嵌入特定云的控制逻辑入口，链接聚合到云提供商的应用编程接口中， 并分离出相互作用的组件与我们的集群交互的组件</p>
+<p>下面的控制器都包含对云平台驱动的依赖：</p>
+<ul>
+<li>节点控制器（Node Controller）: 用于在节点终止响应后检查云提供商以确定节点是否已被删除</li>
+<li>路由控制器（Route Controller）: 用于在底层云基础架构中设置路由</li>
+<li>服务控制器（Service Controller）: 用于创建、更新和删除云提供商负载均衡器</li>
+</ul>
+<h2 id="Node-组件"><a href="#Node-组件" class="headerlink" title="Node 组件"></a><strong>Node 组件</strong></h2><p>Node组件在每个节点上运行，维护运行的 Pod 并提供 Kubernetes 运行环境。</p>
+<h3 id="kubelet"><a href="#kubelet" class="headerlink" title="kubelet"></a><strong>kubelet</strong></h3><p>一个在集群中每个节点上运行的代理。 它保证容器都运行在 Pod 中。</p>
+<p>kubelet 接收一组通过各类机制提供给它的 PodSpecs，确保这些 PodSpecs 中描述的容器处于运行状态且健康。 kubelet 不会管理不是由 Kubernetes 创建的容器。</p>
+<h3 id="kube-proxy"><a href="#kube-proxy" class="headerlink" title="kube-proxy"></a><strong>kube-proxy</strong></h3><p><a href="https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-proxy/" target="_blank" rel="noopener">kube-proxy</a> 是集群中每个节点上运行的网络代理， 实现 Kubernetes <a href="https://kubernetes.io/zh/docs/concepts/services-networking/service/" target="_blank" rel="noopener">服务（Service）</a>概念的一部分。</p>
+<p>kube-proxy 维护节点上的网络规则。这些网络规则允许从集群内部或外部的网络会话与 Pod 进行网络通信。</p>
+<p>如果操作系统提供了数据包过滤层并可用的话，kube-proxy 会通过它来实现网络规则。否则， kube-proxy 仅转发流量本身。</p>
+<h3 id="容器运行时（Container-Runtime）"><a href="#容器运行时（Container-Runtime）" class="headerlink" title="容器运行时（Container Runtime）"></a><strong>容器运行时（Container Runtime）</strong></h3><p>容器运行环境是负责运行容器的软件。</p>
+<p>Kubernetes 支持多个容器运行环境: <a href="https://kubernetes.io/zh/docs/reference/kubectl/docker-cli-to-kubectl/" target="_blank" rel="noopener">Docker</a>、 <a href="https://containerd.io/docs/" target="_blank" rel="noopener">containerd</a>、<a href="https://cri-o.io/#what-is-cri-o" target="_blank" rel="noopener">CRI-O</a> 以及任何实现 <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md" target="_blank" rel="noopener">Kubernetes CRI (容器运行环境接口)</a>。</p>
+<h2 id="Addons-插件"><a href="#Addons-插件" class="headerlink" title="Addons 插件"></a><strong>Addons 插件</strong></h2><p>插件使用 Kubernetes 资源（<a href="https://kubernetes.io/zh/docs/concepts/workloads/controllers/daemonset/" target="_blank" rel="noopener">DaemonSet</a>、 <a href="https://kubernetes.io/zh/docs/concepts/workloads/controllers/deployment/" target="_blank" rel="noopener">Deployment</a>等）实现集群功能。 因为这些插件提供集群级别的功能，插件中命名空间域的资源属于 <code>kube-system</code> 命名空间。</p>
+<p>下面描述众多插件中的几种。有关可用插件的完整列表，请参见 <a href="https://kubernetes.io/zh/docs/concepts/cluster-administration/addons/" target="_blank" rel="noopener">插件（Addons）</a>。</p>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a><strong>DNS</strong></h3><p>尽管其他插件都并非严格意义上的必需组件，但几乎所有 Kubernetes 集群都应该 有<a href="https://kubernetes.io/zh/docs/concepts/services-networking/dns-pod-service/" target="_blank" rel="noopener">集群 DNS</a>， 因为很多示例都需要 DNS 服务。</p>
+<p>集群 DNS 是一个 DNS 服务器，和环境中的其他 DNS 服务器一起工作，它为 Kubernetes 服务提供 DNS 记录。</p>
+<p>Kubernetes 启动的容器自动将此 DNS 服务器包含在其 DNS 搜索列表中。</p>
+<h3 id="Web-界面（仪表盘）"><a href="#Web-界面（仪表盘）" class="headerlink" title="Web 界面（仪表盘）"></a><strong>Web 界面（仪表盘）</strong></h3><p><a href="https://kubernetes.io/zh/docs/tasks/access-application-cluster/web-ui-dashboard/" target="_blank" rel="noopener">Dashboard</a> 是Kubernetes 集群的通用的、基于 Web 的用户界面。 它使用户可以管理集群中运行的应用程序以及集群本身并进行故障排除。</p>
+<h3 id="容器资源监控"><a href="#容器资源监控" class="headerlink" title="容器资源监控"></a><strong>容器资源监控</strong></h3><p><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/resource-usage-monitoring/" target="_blank" rel="noopener">容器资源监控</a> 将关于容器的一些常见的时间序列度量值保存到一个集中的数据库中，并提供用于浏览这些数据的界面。</p>
+<h3 id="集群层面日志"><a href="#集群层面日志" class="headerlink" title="集群层面日志"></a><strong>集群层面日志</strong></h3><p><a href="https://kubernetes.io/zh/docs/concepts/cluster-administration/logging/" target="_blank" rel="noopener">集群层面日志</a> 机制负责将容器的日志数据 保存到一个集中的日志存储中，该存储能够提供搜索和浏览接口。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://kubernetes.io/zh/docs/concepts/overview/components/#control-plane-components" target="_blank" rel="noopener">Kubernetes 组件</a></p>
+
+      <script>
+        window.disqusProxy={
+          shortname: 'diyishuai',
+          username: 'di1shuai',
+          server: 'disqus.di1shuai.com',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: 'Kubernetes架构.html',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script></div><div class="post-copyright"><script type="text/javascript" src="/js/copyright.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copyright.css"><p><span>本文标题：</span>Kubernetes架构</p><p><span>文章作者：</span>Shea</p><p><span>原始链接：</span><a href="/Kubernetes架构.html">https://di1shuai.com/Kubernetes架构.html</a><span class="copy-path"><i class="fa fa-clipboard" data-clipboard-text="https://di1shuai.com/Kubernetes架构.html"></i></span></p><p><span>版权声明：</span>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</p></div><br><div class="tags"><a href="/tags/Kubernetes/"><i class="fa fa-tag"></i>Kubernetes</a></div><div class="post-nav"><a class="pre" href="/Flink数据转换-Transformation.html">Flink-DataStream-Transformations</a><a class="next" href="/使用GithubAction推送Docker到华为镜像中心.html">使用GithubAction推送Docker到香港华为镜像中心</a></div>
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://di1shuai.com/Kubernetes架构.html';
+    this.page.identifier = 'Kubernetes架构.html';
+    this.page.title = 'Kubernetes架构';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//diyishuai.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//diyishuai.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://diyishuai.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="https://di1shuai.com"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/emotion/">emotion</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/products/">products</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/Flink数据转换-Transformation.html">Flink-DataStream-Transformations</a></li><li class="post-list-item"><a class="post-list-link" href="/Kubernetes架构.html">Kubernetes架构</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction推送Docker到华为镜像中心.html">使用GithubAction推送Docker到香港华为镜像中心</a></li><li class="post-list-item"><a class="post-list-link" href="/docker-compose安装单机Elasticsearch.html">docker-compose安装单机Elasticsearch</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction发布Flutter项目.html">使用GithubAction发布Flutter项目-Android</a></li><li class="post-list-item"><a class="post-list-link" href="/招行积分题.html">招行积分题</a></li><li class="post-list-item"><a class="post-list-link" href="/设计模式之行为型.html">设计模式之行为型</a></li><li class="post-list-item"><a class="post-list-link" href="/Java各版本新特性.html">Java各版本新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——分区策略.html">Kafka——分区策略</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——Rebalance过程.html">Kafka——Rebalance过程</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.csdn.net/u012373815" title="Abel的博客(大数据、AI专家)" target="_blank">Abel的博客(大数据、AI专家)</a><ul></ul><a href="https://blog.csdn.net/u010416101" title="Sean的博客(大数据、AI专家)" target="_blank">Sean的博客(大数据、AI专家)</a><ul></ul><a href="https://yo-cwj.com/" title="陈文俊的博客(前端专家)" target="_blank">陈文俊的博客(前端专家)</a><ul></ul><a href="https://www.xilanhua-c7.top" title="西蓝花的博客(未知领域专家)" target="_blank">西蓝花的博客(未知领域专家)</a><ul></ul><a href="https://gaojianchao.github.io/learngit/" title="Alan的博客(AI专家)" target="_blank">Alan的博客(AI专家)</a><ul></ul><a href="https://woj.app" title="虾米的蜗居" target="_blank">虾米的蜗居</a><ul></ul><a href="https://blog.mightyherox.me" title="circlehotarux的博客" target="_blank">circlehotarux的博客</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2016-2021 <a href="/." rel="nofollow">第一帅 </a> |&nbsp;<a rel="nofollow" target="_blank" href="https://beian.miit.gov.cn"> 晋ICP备15004021号-1</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.1" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/love.js"></script><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.1"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.1"></script></div></body></html>

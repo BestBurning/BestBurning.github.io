@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="正走在通向编程、艺术、摄影、剪辑、写作、运动的路上的Full Stacker,Stay Cool!!!"><meta name="google-site-verification" content="q2XooBg_4_mx5-YvLlJvWzU3gxn_9nUvFpLz2_pU584"><meta name="keywords" content="命令"><title>命令合集 - 第一帅</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.1"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-163115360-1','auto');ga('send','pageview');
+</script><script>(function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">命令合集</h1><a id="logo" href="/.">第一帅</a><p class="description">Shea的博客</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/tags/"><i class="fa fa-tag"> 标签</i></a><a href="/products/"><i class="fa fa-cubes"> 作品</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/guestbook/"><i class="fa fa-comments"> 留言</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">命令合集</h1><div class="post-meta">2020-04-17<span> | </span><span class="category"><a href="/categories/technology/">technology</a><span>  </span></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" data-disqus-identifier="命令合集.html" href="/命令合集.html#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-number">1.</span> <span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis"><span class="toc-number">1.1.</span> <span class="toc-text">Redis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL"><span class="toc-number">1.2.</span> <span class="toc-text">MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mongo"><span class="toc-number">1.3.</span> <span class="toc-text">Mongo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka"><span class="toc-number">1.4.</span> <span class="toc-text">Kafka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZooKeeper"><span class="toc-number">1.5.</span> <span class="toc-text">ZooKeeper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Druid-Imply"><span class="toc-number">1.6.</span> <span class="toc-text">Druid-Imply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RabbitMQ"><span class="toc-number">1.7.</span> <span class="toc-text">RabbitMQ</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Database"><span class="toc-number">2.</span> <span class="toc-text">Database</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL-1"><span class="toc-number">2.1.</span> <span class="toc-text">MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB"><span class="toc-number">2.2.</span> <span class="toc-text">MongoDB</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Platform"><span class="toc-number">3.</span> <span class="toc-text">Platform</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux"><span class="toc-number">3.1.</span> <span class="toc-text">Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows"><span class="toc-number">3.2.</span> <span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac"><span class="toc-number">3.3.</span> <span class="toc-text">Mac</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MQ"><span class="toc-number">4.</span> <span class="toc-text">MQ</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RabbitMQ-1"><span class="toc-number">4.1.</span> <span class="toc-text">RabbitMQ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka-Manager"><span class="toc-number">4.2.</span> <span class="toc-text">Kafka-Manager</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BigData"><span class="toc-number">5.</span> <span class="toc-text">BigData</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Imply"><span class="toc-number">5.1.</span> <span class="toc-text">Imply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hadoop"><span class="toc-number">5.2.</span> <span class="toc-text">Hadoop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hive"><span class="toc-number">5.3.</span> <span class="toc-text">Hive</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#云平台"><span class="toc-number">6.</span> <span class="toc-text">云平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#腾讯云"><span class="toc-number">6.1.</span> <span class="toc-text">腾讯云</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阿里云"><span class="toc-number">6.2.</span> <span class="toc-text">阿里云</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端"><span class="toc-number">7.</span> <span class="toc-text">前端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter"><span class="toc-number">7.1.</span> <span class="toc-text">Flutter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Project"><span class="toc-number">7.1.1.</span> <span class="toc-text">Project</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Plugin"><span class="toc-number">7.1.2.</span> <span class="toc-text">Plugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Icon"><span class="toc-number">7.1.3.</span> <span class="toc-text">Icon</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Desktop"><span class="toc-number">7.1.4.</span> <span class="toc-text">Desktop</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Macos"><span class="toc-number">7.1.4.1.</span> <span class="toc-text">Macos</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Code"><span class="toc-number">7.1.5.</span> <span class="toc-text">Code</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Build"><span class="toc-number">7.1.6.</span> <span class="toc-text">Build</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#android"><span class="toc-number">7.1.6.1.</span> <span class="toc-text">android</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ios"><span class="toc-number">7.1.6.2.</span> <span class="toc-text">ios</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#go-flutter"><span class="toc-number">7.1.7.</span> <span class="toc-text">go-flutter</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Plugin-1"><span class="toc-number">7.1.7.1.</span> <span class="toc-text">Plugin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Build-1"><span class="toc-number">7.1.7.2.</span> <span class="toc-text">Build</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Mac-1"><span class="toc-number">7.1.7.2.1.</span> <span class="toc-text">Mac</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="post-content"><p>整理一个用过的命令的地方，方便自己，也方便他人吧</p>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><ul>
+<li>redis安装</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">docker pull <span class="keyword">redi</span><span class="variable">s:3</span>.<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Redis运行</li>
+</ul>
+<figure class="highlight haskell"><table><tr><td class="code"><pre><span class="line">~/redis$ docker run -p <span class="number">6379</span>:<span class="number">6379</span> -v $<span class="type">PWD</span>/<span class="class"><span class="keyword">data</span>:/<span class="keyword">data</span>  -d redis:3.2 redis-server <span class="comment">--appendonly yes</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>-p 6379:6379</code>  : 将容器的6379端口映射到主机的6379端口</p>
+<p><code>-v $PWD/data:/data</code> : 将主机中当前目录下的data挂载到容器的/data</p>
+<p><code>redis-server --appendonly yes</code> : 在容器执行redis-server启动命令，并打开redis持久化配置</p>
+<ul>
+<li>用redis-client端链接容器内部</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">docker exec -<span class="keyword">it</span> <span class="number">43</span>f7a65ec7f8 redis-cli</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看容器运行状况</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker ps</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><ul>
+<li>Mysql 运行</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">docker <span class="builtin-name">run</span> --name mysql -e <span class="attribute">MYSQL_ROOT_PASSWORD</span>=admin -p 3306:3306 -d mysql:5.7.21</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>链接MySQL</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> <span class="comment">--rm \</span></span><br><span class="line"><span class="comment">--link mysql:mysql \</span></span><br><span class="line">mysql \</span><br><span class="line">sh -c 'exec mysql -h<span class="string">"$MYSQL_PORT_3306_TCP_ADDR"</span> -P<span class="string">"$MYSQL_PORT_3306_TCP_PORT"</span> -uroot -p<span class="string">"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"</span>'</span><br></pre></td></tr></table></figure>
+
+<h3 id="Mongo"><a href="#Mongo" class="headerlink" title="Mongo"></a>Mongo</h3><ul>
+<li>Mongo 启动</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 不带验证</span></span><br><span class="line">docker <span class="keyword">run</span><span class="bash"> -p 27017:27017 -v <span class="variable">$PWD</span>/db:/data/db -d mongo:3.6.3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 带验证</span></span><br><span class="line">docker <span class="keyword">run</span><span class="bash"> -p 27017:27017 -v <span class="variable">$PWD</span>/db:/data/db -d mongo:3.6.3 --auth</span></span><br><span class="line">docker exec -it <span class="number">8</span>a00b0e0b75b mongo admin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用户初始化</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">mongo</span></span><br><span class="line"><span class="selector-tag">use</span> <span class="selector-tag">admin</span></span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.createUser</span>(&#123; <span class="attribute">user</span>: <span class="string">'shuai'</span>, <span class="attribute">pwd</span>: <span class="string">'admin'</span>, <span class="attribute">roles</span>: [ &#123; <span class="attribute">role</span>: <span class="string">"root"</span>, <span class="attribute">db</span>: <span class="string">"admin"</span> &#125; ] &#125;);</span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.auth</span>(<span class="string">"shuai"</span>,<span class="string">"admin"</span>)</span><br><span class="line"><span class="selector-tag">use</span> <span class="selector-tag">dspDashboard</span></span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.createUser</span>(</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attribute">user</span>: <span class="string">"shuai"</span>,</span><br><span class="line">        <span class="attribute">pwd</span>: <span class="string">"admin"</span>,</span><br><span class="line">        <span class="attribute">roles</span>: [ <span class="string">"readWrite"</span>, <span class="string">"dbAdmin"</span> ]</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h3><ul>
+<li>Kafka 安装</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker</span> pull wurstmeister/kafka:<span class="number">0.10.0.1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Kafka 启动</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">docker <span class="builtin-name">run</span> --name kafka \</span><br><span class="line">-p 9092:9092 \</span><br><span class="line">-e <span class="attribute">KAFKA_ADVERTISED_HOST_NAME</span>=mine \</span><br><span class="line">-e <span class="attribute">KAFKA_ADVERTISED_PORT</span>=9092 \</span><br><span class="line">-e <span class="attribute">KAFKA_CREATE_TOPICS</span>=<span class="string">"test:1:1"</span> \</span><br><span class="line">-e <span class="attribute">KAFKA_ZOOKEEPER_CONNECT</span>=192.168.214.220:2181 \</span><br><span class="line">-d wurstmeister/kafka:0.10.0.1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Kafka Manager</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">docker <span class="builtin-name">run</span> -itd \</span><br><span class="line"><span class="attribute">--restart</span>=always \</span><br><span class="line"><span class="attribute">--name</span>=kafka-manager \</span><br><span class="line">-p 9000:9000 \</span><br><span class="line">-e <span class="attribute">ZK_HOSTS</span>=<span class="string">"192.168.214.220:2181"</span> \</span><br><span class="line">sheepkiller/kafka-manager</span><br></pre></td></tr></table></figure>
+
+<h3 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h3><ul>
+<li>ZooKeeper 安装</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker pull zookeeper</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Zookeeper 启动</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">run</span> <span class="comment">--name some-zookeeper \</span></span><br><span class="line"><span class="comment">--restart always \</span></span><br><span class="line">-p <span class="number">2181</span>:<span class="number">2181</span> \</span><br><span class="line">-d zookeeper</span><br></pre></td></tr></table></figure>
+
+<h3 id="Druid-Imply"><a href="#Druid-Imply" class="headerlink" title="Druid-Imply"></a>Druid-Imply</h3><ul>
+<li>Imply</li>
+</ul>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">docker run -p <span class="number">8081-8110</span>:<span class="number">8081-8110</span> -p <span class="number">8200:8200</span> -p <span class="number">9095:9095</span> -d --name imply imply/imply</span><br><span class="line">docker exec -it imply bin/post-index-task -f quickstart/wikiticker-index.json</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Docker-Compose</li>
+</ul>
+<p><code>docker-compose.yml:</code></p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="symbol">version:</span> <span class="string">'2'</span></span><br><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  zookeeper:</span></span><br><span class="line"><span class="symbol">    image:</span> wurstmeister/zookeeper   <span class="meta">## 镜像</span></span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"2181:2181"</span>                 <span class="meta">## 对外暴露的端口号</span></span><br><span class="line"><span class="symbol">  kafka:</span></span><br><span class="line"><span class="symbol">    image:</span> wurstmeister/kafka       <span class="meta">## 镜像</span></span><br><span class="line"><span class="symbol">    volumes:</span> </span><br><span class="line">         - <span class="meta-keyword">/var/</span>run/docker.sock:<span class="meta-keyword">/var/</span>run/docker.sock</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"9092:9092"</span></span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line"><span class="symbol">      KAFKA_ADVERTISED_HOST_NAME:</span> localhost   <span class="meta">## 修改:宿主机IP</span></span><br><span class="line"><span class="symbol">      KAFKA_ZOOKEEPER_CONNECT:</span> zookeeper:<span class="number">2181</span>       <span class="meta">## 卡夫卡运行是基于zookeeper的</span></span><br><span class="line"><span class="symbol">  kafka_manager:</span></span><br><span class="line"><span class="symbol">    image:</span> hlebalbau/kafka-manager:latest</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"9000:9000"</span></span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line"><span class="symbol">      ZK_HOSTS:</span> <span class="string">"zookeeper:2181"</span></span><br><span class="line"><span class="symbol">      APPLICATION_SECRET:</span> <span class="string">"random-secret"</span></span><br><span class="line"><span class="symbol">    command:</span> -Dpidfile.path=<span class="meta-keyword">/dev/</span>null</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="symbol">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  zookeeper:</span></span><br><span class="line"><span class="symbol">    image:</span> wurstmeister/zookeeper   <span class="meta">## 镜像</span></span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"2181:2181"</span>                 <span class="meta">## 对外暴露的端口号</span></span><br><span class="line"><span class="symbol">  kafka:</span></span><br><span class="line"><span class="symbol">    image:</span> wurstmeister/kafka       <span class="meta">## 镜像</span></span><br><span class="line"><span class="symbol">    volumes:</span> </span><br><span class="line">      - <span class="meta-keyword">/var/</span>run/docker.sock:<span class="meta-keyword">/var/</span>run/docker.sock</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"9092:9092"</span></span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line"><span class="symbol">      KAFKA_ADVERTISED_HOST_NAME:</span> localhost   <span class="meta">## 修改:宿主机IP</span></span><br><span class="line"><span class="symbol">      KAFKA_ZOOKEEPER_CONNECT:</span> zookeeper:<span class="number">2181</span>       <span class="meta">## 卡夫卡运行是基于zookeeper的</span></span><br><span class="line"><span class="symbol">  kafka_manager:</span></span><br><span class="line"><span class="symbol">    image:</span> hlebalbau/kafka-manager:latest</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"9000:9000"</span></span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line"><span class="symbol">      ZK_HOSTS:</span> <span class="string">"zookeeper:2181"</span></span><br><span class="line"><span class="symbol">      APPLICATION_SECRET:</span> <span class="string">"random-secret"</span></span><br><span class="line"><span class="symbol">    command:</span> -Dpidfile.path=<span class="meta-keyword">/dev/</span>null</span><br><span class="line"><span class="symbol">    volumes:</span> </span><br><span class="line">      - <span class="meta-keyword">/var/</span>run/docker.sock:<span class="meta-keyword">/var/</span>run/docker.sock</span><br><span class="line"><span class="symbol">  imply:</span></span><br><span class="line"><span class="symbol">    image:</span> imply/imply</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"2182:2181"</span></span><br><span class="line">      - <span class="string">"8081-8110:8081-8110"</span></span><br><span class="line">      - <span class="string">"8200:8200"</span></span><br><span class="line">      - <span class="string">"9095:9095"</span></span><br><span class="line"><span class="symbol">    links:</span></span><br><span class="line">      - kafka</span><br><span class="line"><span class="symbol">    volumes:</span> </span><br><span class="line">      - <span class="meta-keyword">/var/</span>run/docker.sock:<span class="meta-keyword">/var/</span>run/docker.sock</span><br></pre></td></tr></table></figure>
+
+<p>run</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker-compose up</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><ul>
+<li>RabbitMQ</li>
+</ul>
+<figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line">docker run -d -p <span class="number">15672</span>:<span class="number">15672</span>  -p  <span class="number">5672</span>:<span class="number">5672</span>  -v $PWD/<span class="symbol">rabbitmq:</span>/var/<span class="class"><span class="keyword">lib</span>/<span class="title">rabbitmq</span>  --<span class="title">name</span> <span class="title">rabbitmq</span> <span class="title">rabbitmq</span>:<span class="title">management</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><h3 id="MySQL-1"><a href="#MySQL-1" class="headerlink" title="MySQL"></a>MySQL</h3><ul>
+<li>允许外部访问</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'root'</span>@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'admin'</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看编码</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'character%'</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><ul>
+<li>插入多条</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.inventory</span><span class="selector-class">.insertMany</span>([</span><br><span class="line">   <span class="comment">// MongoDB adds the _id field with an ObjectId if _id is not present</span></span><br><span class="line">   &#123; <span class="attribute">item</span>: <span class="string">"journal"</span>, <span class="attribute">qty</span>: <span class="number">25</span>, <span class="attribute">status</span>: <span class="string">"A"</span>,</span><br><span class="line">       <span class="attribute">size</span>: &#123; <span class="attribute">h</span>: <span class="number">14</span>, <span class="attribute">w</span>: <span class="number">21</span>, <span class="attribute">uom</span>: <span class="string">"cm"</span> &#125;, <span class="attribute">tags</span>: [ <span class="string">"blank"</span>, <span class="string">"red"</span> ] &#125;,</span><br><span class="line">   &#123; <span class="attribute">item</span>: <span class="string">"notebook"</span>, <span class="attribute">qty</span>: <span class="number">50</span>, <span class="attribute">status</span>: <span class="string">"A"</span>,</span><br><span class="line">       <span class="attribute">size</span>: &#123; <span class="attribute">h</span>: <span class="number">8.5</span>, <span class="attribute">w</span>: <span class="number">11</span>, <span class="attribute">uom</span>: <span class="string">"in"</span> &#125;, <span class="attribute">tags</span>: [ <span class="string">"red"</span>, <span class="string">"blank"</span> ] &#125;,</span><br><span class="line">   &#123; <span class="attribute">item</span>: <span class="string">"paper"</span>, <span class="attribute">qty</span>: <span class="number">100</span>, <span class="attribute">status</span>: <span class="string">"D"</span>,</span><br><span class="line">       <span class="attribute">size</span>: &#123; <span class="attribute">h</span>: <span class="number">8.5</span>, <span class="attribute">w</span>: <span class="number">11</span>, <span class="attribute">uom</span>: <span class="string">"in"</span> &#125;, <span class="attribute">tags</span>: [ <span class="string">"red"</span>, <span class="string">"blank"</span>, <span class="string">"plain"</span> ] &#125;,</span><br><span class="line">   &#123; <span class="attribute">item</span>: <span class="string">"planner"</span>, <span class="attribute">qty</span>: <span class="number">75</span>, <span class="attribute">status</span>: <span class="string">"D"</span>,</span><br><span class="line">       <span class="attribute">size</span>: &#123; <span class="attribute">h</span>: <span class="number">22.85</span>, <span class="attribute">w</span>: <span class="number">30</span>, <span class="attribute">uom</span>: <span class="string">"cm"</span> &#125;, <span class="attribute">tags</span>: [ <span class="string">"blank"</span>, <span class="string">"red"</span> ] &#125;,</span><br><span class="line">   &#123; <span class="attribute">item</span>: <span class="string">"postcard"</span>, <span class="attribute">qty</span>: <span class="number">45</span>, <span class="attribute">status</span>: <span class="string">"A"</span>,</span><br><span class="line">       <span class="attribute">size</span>: &#123; <span class="attribute">h</span>: <span class="number">10</span>, <span class="attribute">w</span>: <span class="number">15.25</span>, <span class="attribute">uom</span>: <span class="string">"cm"</span> &#125;, <span class="attribute">tags</span>: [ <span class="string">"blue"</span> ] &#125;</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查找全部</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.inventory</span><span class="selector-class">.find</span>( &#123;&#125; )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查找过滤条件</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.inventory</span><span class="selector-class">.find</span>( &#123; <span class="attribute">status</span>: <span class="string">"D"</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>条件查找</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">db.inventory.find( &#123; <span class="string">size:</span> &#123; <span class="string">h:</span> <span class="number">14</span>, <span class="string">w:</span> <span class="number">21</span>, <span class="string">uom:</span> <span class="string">"cm"</span> &#125; &#125; )</span><br><span class="line">db.inventory.find( &#123; <span class="string">"size.uom"</span>: <span class="string">"in"</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>选择DB</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">use</span> myDB</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建DB</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="keyword">use</span> diyishuai</span><br><span class="line"><span class="keyword">db</span>.student.insertOne(&#123;<span class="string">"name"</span>:<span class="string">"diyishuai"</span>,<span class="string">"age"</span>:25,<span class="string">"girls"</span>:[&#123;<span class="string">"name"</span>:<span class="string">"tomato"</span>,<span class="string">"age"</span>:18&#125;,&#123;<span class="string">"name"</span>:<span class="string">"vivian"</span>,<span class="string">"age"</span>:20&#125;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<pre><code>The insertOne() operation creates both the database myNewDB and the collection myNewCollection1 if they do not already exist.</code></pre><ul>
+<li>创建collection</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.myNewCollection2</span><span class="selector-class">.insertOne</span>( &#123; <span class="attribute">x</span>: <span class="number">1</span> &#125; )</span><br><span class="line"><span class="selector-tag">db</span><span class="selector-class">.myNewCollection3</span><span class="selector-class">.createIndex</span>( &#123; <span class="attribute">y</span>: <span class="number">1</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>按ObjectId查询</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">db.advertisement.<span class="builtin-name">find</span>(&#123;<span class="string">"_id"</span> : ObjectId(<span class="string">"5b1f6e0fc365845f49a4ec2c"</span>)&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建唯一索引</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line">db.advertisement.ensureIndex(&#123;<span class="string">"name"</span>:<span class="number">1</span>,<span class="string">"productId"</span>:<span class="number">1</span>&#125;,&#123;<span class="string">"unique"</span>:<span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Mongo数据导出</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">mongodump -u shuai -<span class="selector-tag">p</span> admin -d attr -o attr</span><br><span class="line">mongodump -u clink -<span class="selector-tag">p</span> Centrix5438 -d api_attr -c click --archive=click<span class="selector-class">.archive</span> --gzip</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Mongo数据导入</li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">./bin/mongoimport</span> <span class="params">--host</span> localhost <span class="params">--port</span> 27017 <span class="params">--db</span> dbname <span class="params">--collection</span> collectionName <span class="params">--username</span> root <span class="params">--password</span> <span class="keyword">pwd</span>  &lt;  mongo.json</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line">mongorestore -<span class="keyword">u</span> shuai -p admin --<span class="keyword">db</span> dashboard --<span class="keyword">dir</span> data/<span class="keyword">db</span>/dashboard</span><br></pre></td></tr></table></figure>
+
+<h2 id="Platform"><a href="#Platform" class="headerlink" title="Platform"></a>Platform</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><ul>
+<li>端口占用查看</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">lsof</span> <span class="selector-tag">-i</span><span class="selector-pseudo">:3306</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>关机</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="built_in">shutdown</span> -h -t <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p><code>-h</code> 关机<br><code>-t</code> 延时多少s </p>
+<ul>
+<li>Hosname修改</li>
+</ul>
+<figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="string">hostnamectl </span><span class="built_in">set-hostname</span> &lt;<span class="string">newhostname&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><ul>
+<li>关机</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="built_in">shutdown</span> -s -t <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>端口查看</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">netstat -ano</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h3><ul>
+<li>关机</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">osascript -e '<span class="keyword">tell</span> app <span class="string">"System Events"</span> <span class="keyword">to</span> shut down'</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">shutdown</span> -h <span class="number">22</span>:<span class="number">30</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>base64 encode</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cat</span> <span class="keyword">file</span> | base64</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>base64 decode</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cat</span> <span class="keyword">file</span> | base64 --<span class="keyword">decode</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h2><h3 id="RabbitMQ-1"><a href="#RabbitMQ-1" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><ul>
+<li>添加远程用户<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line">rabbitmqctl add_user<span class="built_in"> root</span> centirxlink123</span><br><span class="line">rabbitmqctl set_user_tags<span class="built_in"> root</span> administrator</span><br><span class="line">rabbitmqctl set_permissions -p /<span class="built_in"> root</span> <span class="string">".*"</span> <span class="string">".*"</span> <span class="string">".*"</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Kafka-Manager"><a href="#Kafka-Manager" class="headerlink" title="Kafka-Manager"></a>Kafka-Manager</h3><ul>
+<li>run</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">nohup bin/kafka-manager -Dconfig.<span class="attribute">file</span>=conf/application.conf -Dhttp.<span class="attribute">port</span>=9000 &amp;</span><br></pre></td></tr></table></figure>
+
+<h2 id="BigData"><a href="#BigData" class="headerlink" title="BigData"></a>BigData</h2><h3 id="Imply"><a href="#Imply" class="headerlink" title="Imply"></a>Imply</h3><ul>
+<li>启动<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line">bin/supervise -c <span class="keyword">conf</span>/supervise/quickstart.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h3><ul>
+<li>授权<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">hdfs dfs -chown root:hdfs  /<span class="keyword">user</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h3><ul>
+<li><p>查看表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看表结构</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">desc tableName<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看表分区</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">partitions</span> tableName;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从分区中查询数据</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">1:</span><br><span class="line">hive (DTS_DEV)&gt; show partitions t_ut_raw_imp_log;</span><br><span class="line">OK</span><br><span class="line">partition</span><br><span class="line"><span class="attribute">pt</span>=2019-02-18</span><br><span class="line"><span class="attribute">pt</span>=2019-03-03</span><br><span class="line"></span><br><span class="line">2:</span><br><span class="line">select * <span class="keyword">from</span> t_ut_raw_imp_log where <span class="attribute">pt</span>=<span class="string">'2019-03-03'</span> limit 10;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="云平台"><a href="#云平台" class="headerlink" title="云平台"></a>云平台</h2><h3 id="腾讯云"><a href="#腾讯云" class="headerlink" title="腾讯云"></a>腾讯云</h3><ul>
+<li><p>ssh登录</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">ssh -i ~<span class="regexp">/.ssh/</span>CentrixlinkMac root<span class="variable">@di1shuai</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Scp文件传输</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">scp -i ~<span class="regexp">/.ssh/</span>CentrixlinkMac knife<span class="number">-1.0</span>.jar root<span class="variable">@di1shuai</span><span class="symbol">:/tmp</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="阿里云"><a href="#阿里云" class="headerlink" title="阿里云"></a>阿里云</h3><ul>
+<li>访问Hadoop、Spark等WEB-UI</li>
+</ul>
+<ol>
+<li><p>Copy自己的公钥到阿里云</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">自己的公钥<span class="string">path:</span><span class="regexp">~/.ssh/</span>id_rsa.pub</span><br><span class="line">阿里云验证<span class="string">path:</span><span class="regexp">/root/</span>.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置自己本地的ssh</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">vi .ssh/config</span><br><span class="line"></span><br><span class="line">Host jms</span><br><span class="line">    HostName jms.xxx.com</span><br><span class="line">   <span class="built_in"> User </span>username</span><br><span class="line">   <span class="built_in"> Port </span>4500</span><br><span class="line"></span><br><span class="line">Host emr</span><br><span class="line">    HostName hxxx.oxxx.sxxx.txxx</span><br><span class="line">    DynamicForward 3128</span><br><span class="line">   <span class="built_in"> User </span>root</span><br><span class="line">   <span class="built_in"> Port </span>22</span><br><span class="line">    </span><br><span class="line">Host druid-master-1</span><br><span class="line">    HostName hxxx.oxxx.sxxx.txxx</span><br><span class="line">    DynamicForward 3128</span><br><span class="line">   <span class="built_in"> User </span>root</span><br><span class="line">   <span class="built_in"> Port </span>22</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动代理</p>
+<figure class="highlight lsl"><table><tr><td class="code"><pre><span class="line">nohup ssh  -ND <span class="number">8157</span> emr &amp;</span><br><span class="line">nohup ssh  -ND <span class="number">8158</span> druid-master<span class="number">-1</span> &amp;</span><br><span class="line">nohup ssh  -ND <span class="number">8159</span> us-hdfs-header<span class="number">-1</span> &amp;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动代理chrome</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">/Applications/Google</span>\ Chrome.app/Contents/MacOS/Google\ Chrome  Chrome <span class="params">--proxy-server=</span><span class="string">"socks5://localhost:8157"</span> <span class="params">--host-resolver-rules=</span><span class="string">"MAP * 0.0.0.0 , EXCLUDE localhost"</span> <span class="params">--user-data-dir=/tmp/</span></span><br><span class="line"></span><br><span class="line"><span class="string">/Applications/Google</span>\ Chrome.app/Contents/MacOS/Google\ Chrome  Chrome <span class="params">--proxy-server=</span><span class="string">"socks5://localhost:8158"</span> <span class="params">--host-resolver-rules=</span><span class="string">"MAP * 0.0.0.0 , EXCLUDE localhost"</span> <span class="params">--user-data-dir=/tmp/</span></span><br><span class="line"></span><br><span class="line"><span class="string">/Applications/Google</span>\ Chrome.app/Contents/MacOS/Google\ Chrome  Chrome <span class="params">--proxy-server=</span><span class="string">"socks5://localhost:8159"</span> <span class="params">--host-resolver-rules=</span><span class="string">"MAP * 0.0.0.0 , EXCLUDE localhost"</span> <span class="params">--user-data-dir=/tmp/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问<code>http://localhost:8088</code>or<code>50070</code></p>
+</li>
+</ol>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><h3 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a>Flutter</h3><ul>
+<li>分支切换</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">flutter channel dev</span><br><span class="line">flutter channel <span class="literal">master</span></span><br><span class="line">flutter channel beta</span><br><span class="line">flutter channel stable</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>升级</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flutter upgrade</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Project"><a href="#Project" class="headerlink" title="Project"></a>Project</h4><ul>
+<li>创建项目</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">flutter create --<span class="keyword">org </span>com.example --<span class="keyword">android-language </span><span class="keyword">java </span>project_name</span><br></pre></td></tr></table></figure>
+
+<h4 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h4><ul>
+<li>创建插件项目</li>
+</ul>
+<figure class="highlight brainfuck"><table><tr><td class="code"><pre><span class="line"><span class="comment">flutter</span> <span class="comment">create</span> --<span class="comment">org</span> <span class="comment">com</span><span class="string">.</span><span class="comment">example</span> --<span class="comment">template=plugin</span> <span class="comment">test_hover</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化插件</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">hover init-plugin github.com/<span class="keyword">my</span>-organization/test_hover</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>null safety 检查</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">dart migrate</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>dart format</li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="code"><pre><span class="line">dartfmt -w .</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>插件发布检查</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">flutter packages pub publish --dry-<span class="keyword">run</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>插件发布</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flutter packages pub publish</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Icon"><a href="#Icon" class="headerlink" title="Icon"></a>Icon</h4><ul>
+<li>生成icon</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">flutter pub <span class="keyword">run</span><span class="bash"> flutter_launcher_icons:main</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Desktop"><a href="#Desktop" class="headerlink" title="Desktop"></a>Desktop</h4><h5 id="Macos"><a href="#Macos" class="headerlink" title="Macos"></a>Macos</h5><ul>
+<li>启用macos</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">flutter<span class="built_in"> config </span>--enable-macos-desktop</span><br></pre></td></tr></table></figure>
+
+<h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><ul>
+<li>开启边界模式</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/rendering.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  debugPaintSizeEnabled = <span class="keyword">true</span>;</span><br><span class="line">  runApp(XXX());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Build"><a href="#Build" class="headerlink" title="Build"></a>Build</h4><h5 id="android"><a href="#android" class="headerlink" title="android"></a>android</h5><ul>
+<li>app bundle</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> &lt;<span class="keyword">app</span> <span class="keyword">dir</span>&gt;</span><br><span class="line"></span><br><span class="line">flutter build appbundle</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>apk</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> &lt;<span class="keyword">app</span> <span class="keyword">dir</span>&gt;</span><br><span class="line"></span><br><span class="line">flutter build apk</span><br><span class="line"></span><br><span class="line">flutter install</span><br></pre></td></tr></table></figure>
+
+<h5 id="ios"><a href="#ios" class="headerlink" title="ios"></a>ios</h5><h4 id="go-flutter"><a href="#go-flutter" class="headerlink" title="go-flutter"></a>go-flutter</h4><h5 id="Plugin-1"><a href="#Plugin-1" class="headerlink" title="Plugin"></a>Plugin</h5><ul>
+<li>插件初始化</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">hover init</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>插件获取</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line">hover plugins <span class="keyword">get</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>插件发布</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">hover plugins</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>开发一个完整插件</li>
+</ul>
+<figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta"># 创建</span></span><br><span class="line">flutter create --org com.example --template=plugin test_hover</span><br><span class="line"></span><br><span class="line"><span class="meta"># 初始化</span></span><br><span class="line">cd test_hover</span><br><span class="line"><span class="meta"># test_hover/</span></span><br><span class="line">hover init-plugin github.com/my-organization/test_hover</span><br><span class="line"></span><br><span class="line"><span class="meta"># 插件开发</span></span><br><span class="line">cd go</span><br><span class="line"><span class="meta"># test_hover/go</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 运行示例</span></span><br><span class="line">cd ../example</span><br><span class="line"><span class="meta"># test_hover/example</span></span><br><span class="line">flutter build bundle</span><br><span class="line">hover init</span><br><span class="line">hover plugins <span class="keyword">get</span></span><br><span class="line">yes | hover run</span><br><span class="line"></span><br><span class="line"><span class="meta"># tag发布</span></span><br><span class="line">cd ..</span><br><span class="line"><span class="meta"># test_hover</span></span><br><span class="line">hover publish-plugin</span><br><span class="line"></span><br><span class="line"><span class="meta"># flutter发布</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># test_hover</span></span><br><span class="line">flutter packages pub publish --dry-run</span><br><span class="line">flutter packages pub publish</span><br></pre></td></tr></table></figure>
+
+<h5 id="Build-1"><a href="#Build-1" class="headerlink" title="Build"></a>Build</h5><h6 id="Mac-1"><a href="#Mac-1" class="headerlink" title="Mac"></a>Mac</h6><ul>
+<li>初始化</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">hover init-packaging darwin-dmg</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>构建</li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">hover</span> <span class="keyword">build </span>darwin-dmg</span><br></pre></td></tr></table></figure>
+
+
+      <script>
+        window.disqusProxy={
+          shortname: 'diyishuai',
+          username: 'di1shuai',
+          server: 'disqus.di1shuai.com',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: '命令合集.html',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script></div><div class="post-copyright"><script type="text/javascript" src="/js/copyright.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copyright.css"><p><span>本文标题：</span>命令合集</p><p><span>文章作者：</span>Shea</p><p><span>原始链接：</span><a href="/命令合集.html">https://di1shuai.com/命令合集.html</a><span class="copy-path"><i class="fa fa-clipboard" data-clipboard-text="https://di1shuai.com/命令合集.html"></i></span></p><p><span>版权声明：</span>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</p></div><br><div class="tags"><a href="/tags/命令/"><i class="fa fa-tag"></i>命令</a></div><div class="post-nav"><a class="pre" href="/设备唯一标识.html">设备唯一标识</a><a class="next" href="/腾讯云cdn刷新.html">腾讯云cdn刷新</a></div>
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://di1shuai.com/命令合集.html';
+    this.page.identifier = '命令合集.html';
+    this.page.title = '命令合集';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//diyishuai.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//diyishuai.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://diyishuai.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="https://di1shuai.com"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/emotion/">emotion</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/products/">products</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/Flink数据转换-Transformation.html">Flink-DataStream-Transformations</a></li><li class="post-list-item"><a class="post-list-link" href="/Kubernetes架构.html">Kubernetes架构</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction推送Docker到华为镜像中心.html">使用GithubAction推送Docker到香港华为镜像中心</a></li><li class="post-list-item"><a class="post-list-link" href="/docker-compose安装单机Elasticsearch.html">docker-compose安装单机Elasticsearch</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction发布Flutter项目.html">使用GithubAction发布Flutter项目-Android</a></li><li class="post-list-item"><a class="post-list-link" href="/招行积分题.html">招行积分题</a></li><li class="post-list-item"><a class="post-list-link" href="/设计模式之行为型.html">设计模式之行为型</a></li><li class="post-list-item"><a class="post-list-link" href="/Java各版本新特性.html">Java各版本新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——分区策略.html">Kafka——分区策略</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——Rebalance过程.html">Kafka——Rebalance过程</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.csdn.net/u012373815" title="Abel的博客(大数据、AI专家)" target="_blank">Abel的博客(大数据、AI专家)</a><ul></ul><a href="https://blog.csdn.net/u010416101" title="Sean的博客(大数据、AI专家)" target="_blank">Sean的博客(大数据、AI专家)</a><ul></ul><a href="https://yo-cwj.com/" title="陈文俊的博客(前端专家)" target="_blank">陈文俊的博客(前端专家)</a><ul></ul><a href="https://www.xilanhua-c7.top" title="西蓝花的博客(未知领域专家)" target="_blank">西蓝花的博客(未知领域专家)</a><ul></ul><a href="https://gaojianchao.github.io/learngit/" title="Alan的博客(AI专家)" target="_blank">Alan的博客(AI专家)</a><ul></ul><a href="https://woj.app" title="虾米的蜗居" target="_blank">虾米的蜗居</a><ul></ul><a href="https://blog.mightyherox.me" title="circlehotarux的博客" target="_blank">circlehotarux的博客</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2016-2021 <a href="/." rel="nofollow">第一帅 </a> |&nbsp;<a rel="nofollow" target="_blank" href="https://beian.miit.gov.cn"> 晋ICP备15004021号-1</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.1" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/love.js"></script><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.1"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.1"></script></div></body></html>

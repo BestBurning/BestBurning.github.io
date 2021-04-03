@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="正走在通向编程、艺术、摄影、剪辑、写作、运动的路上的Full Stacker,Stay Cool!!!"><meta name="google-site-verification" content="q2XooBg_4_mx5-YvLlJvWzU3gxn_9nUvFpLz2_pU584"><meta name="keywords" content="Github Action,Flutter,Release,发布,Android"><title>使用GithubAction发布Flutter项目-Android - 第一帅</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.1"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-163115360-1','auto');ga('send','pageview');
+</script><script>(function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">使用GithubAction发布Flutter项目-Android</h1><a id="logo" href="/.">第一帅</a><p class="description">Shea的博客</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/tags/"><i class="fa fa-tag"> 标签</i></a><a href="/products/"><i class="fa fa-cubes"> 作品</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/guestbook/"><i class="fa fa-comments"> 留言</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">使用GithubAction发布Flutter项目-Android</h1><div class="post-meta">2020-11-01<span> | </span><span class="category"><a href="/categories/technology/">technology</a><span>  </span></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" data-disqus-identifier="使用GithubAction发布Flutter项目.html" href="/使用GithubAction发布Flutter项目.html#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-本地"><span class="toc-number">1.</span> <span class="toc-text">Android - 本地</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#App-Logo-修改"><span class="toc-number">1.1.</span> <span class="toc-text">App Logo 修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#App-Name-修改"><span class="toc-number">1.2.</span> <span class="toc-text">App Name 修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限"><span class="toc-number">1.3.</span> <span class="toc-text">权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#签名"><span class="toc-number">1.4.</span> <span class="toc-text">签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地-Build"><span class="toc-number">1.5.</span> <span class="toc-text">本地 Build</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github-Action-CI"><span class="toc-number">2.</span> <span class="toc-text">Github Action CI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Secrets"><span class="toc-number">2.1.</span> <span class="toc-text">Secrets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置-Action"><span class="toc-number">2.2.</span> <span class="toc-text">配置 Action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Push-Tag"><span class="toc-number">2.3.</span> <span class="toc-text">Push Tag</span></a></li></ol></li></ol></div></div><div class="post-content"><p><code>CI</code>目标: 使用<code>GithubAction</code>发布<code>Flutter</code>项目</p>
+<ul>
+<li><code>Android</code> - <code>PlayStore</code>/<code>GithubRelease</code></li>
+<li><code>IOS</code> - <code>AppStore</code></li>
+<li><code>Macos</code> - <code>GithubRelease</code></li>
+<li><code>Linux</code> - <code>GithubRelease</code></li>
+<li><code>Windows</code> - <code>GithubRelease</code></li>
+</ul>
+<p><img src="https://images.di1shuai.com/flutter_ci.jpg" alt></p>
+<p>那就先来看看如何<code>CI</code>发布<code>Flutter</code>-<code>Android</code>吧</p>
+<h2 id="Android-本地"><a href="#Android-本地" class="headerlink" title="Android - 本地"></a>Android - 本地</h2><h3 id="App-Logo-修改"><a href="#App-Logo-修改" class="headerlink" title="App Logo 修改"></a>App Logo 修改</h3><ol>
+<li>修改<code>pubspec.yaml</code>下的:</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">dev_dependencies:</span></span><br><span class="line">  <span class="attr">flutter_launcher_icons:</span> <span class="string">^0.8.1</span></span><br><span class="line"></span><br><span class="line"><span class="attr">flutter_icons:</span></span><br><span class="line">  <span class="attr">android:</span> <span class="string">"launcher_icon"</span></span><br><span class="line">  <span class="attr">ios:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">image_path:</span> <span class="string">"assets/logo/logo.png"</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>运行</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">flutter pub get</span><br><span class="line">flutter pub run flutter_launcher_icons:main</span><br></pre></td></tr></table></figure>
+
+<h3 id="App-Name-修改"><a href="#App-Name-修改" class="headerlink" title="App Name 修改"></a>App Name 修改</h3><ol>
+<li>修改<code>pubspec.yaml</code>下的:</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">dev_dependencies:</span></span><br><span class="line">  <span class="attr">flutter_launcher_name:</span> <span class="string">^0.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="attr">flutter_launcher_name:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">"APPName"</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>运行</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">flutter pub get</span><br><span class="line">flutter pub run flutter_launcher_name:main</span><br></pre></td></tr></table></figure>
+
+<p>Check</p>
+<p><code>Android</code> - <code>android/app/src/main/AndroidManifest.xml</code></p>
+<p><code>IOS</code> - <code>ios/Runner/Info.plist</code></p>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><p>文件路径 : <code>android/app/src/main/AndroidManifest.xml</code></p>
+<p><code>manifest</code>之后加入<code>uses-permission</code>标签，e.g.</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">package</span>=<span class="string">"com.di1shuai.xxx"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.ACCESS_NETWORK_STATE"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.ACCESS_WIFI_STATE"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>具体权限名称参考 <a href="https://developer.android.com/reference/android/Manifest.permission?hl=zh-cn" target="_blank" rel="noopener">Manifest.permission</a></p>
+<h3 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h3><ol>
+<li>创建<code>key.jks</code>,已有可忽略</li>
+</ol>
+<ul>
+<li>Mac/Linux</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -<span class="built_in">alias</span> key</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Windows</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -genkey -v -keystore c:\Users\USER_NAME\key.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -<span class="built_in">alias</span> key</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置<code>Gradle</code></li>
+</ol>
+<p>路径: <code>android/app/build.gradle</code></p>
+<ul>
+<li>设置 <code>signingConfigs</code> 以及 <code>buildTypes</code></li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  </span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">       ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &lt;!-- <span class="keyword">import</span> start --&gt;</span><br><span class="line">    signingConfigs &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            keyAlias keystoreProperties[<span class="string">'keyAlias'</span>]</span><br><span class="line">            keyPassword keystoreProperties[<span class="string">'keyPassword'</span>]</span><br><span class="line">            storeFile keystoreProperties[<span class="string">'storeFile'</span>] ? <span class="keyword">file</span>(keystoreProperties[<span class="string">'storeFile'</span>]) : <span class="keyword">null</span></span><br><span class="line">            storePassword keystoreProperties[<span class="string">'storePassword'</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            signingConfig signingConfigs.debug</span><br><span class="line">        &#125;</span><br><span class="line">        release &#123;</span><br><span class="line">            signingConfig signingConfigs.release</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &lt;!-- <span class="keyword">import</span> end --&gt;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置<code>keystoreProperties</code></li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line">apply <span class="keyword">from</span>: <span class="string">"$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"</span></span><br><span class="line"></span><br><span class="line">&lt;!-- <span class="keyword">import</span> start --&gt;</span><br><span class="line"><span class="keyword">def</span> keystoreProperties = <span class="keyword">new</span> Properties()</span><br><span class="line"><span class="keyword">def</span> keystorePropertiesFile = rootProject.<span class="keyword">file</span>(<span class="string">'key.properties'</span>)</span><br><span class="line"><span class="keyword">if</span> (keystorePropertiesFile.exists()) &#123;</span><br><span class="line">    keystoreProperties.load(<span class="keyword">new</span> FileInputStream(keystorePropertiesFile))</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    keystoreProperties.setProperty(<span class="string">'storePassword'</span>, System.getenv(<span class="string">'KEY_STORE_PASSWORD'</span>));</span><br><span class="line">    keystoreProperties.setProperty(<span class="string">'keyPassword'</span>, System.getenv(<span class="string">'KEY_PASSWORD'</span>));</span><br><span class="line">    keystoreProperties.setProperty(<span class="string">'keyAlias'</span>, System.getenv(<span class="string">'KEY_ALIAS'</span>));</span><br><span class="line">    keystoreProperties.setProperty(<span class="string">'storeFile'</span>, System.getenv(<span class="string">'KEY_PATH'</span>));</span><br><span class="line">&#125;</span><br><span class="line">&lt;!-- <span class="keyword">import</span> end --&gt;</span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion <span class="number">29</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>设置环境变量</li>
+</ol>
+<p>path: <code>macos</code>/<code>linux</code> 下 <code>~/.zshrc</code> or <code>~/.bashrc</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Flutter - Android</span></span><br><span class="line"><span class="built_in">export</span> KEY_STORE_PASSWORD=XXXXX</span><br><span class="line"><span class="built_in">export</span> KEY_PASSWORD=XXXXX</span><br><span class="line"><span class="built_in">export</span> KEY_ALIAS=key</span><br><span class="line"><span class="built_in">export</span> KEY_PATH=~/key.jks</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地-Build"><a href="#本地-Build" class="headerlink" title="本地 Build"></a>本地 Build</h3><ul>
+<li><code>APK</code> Build</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">flutter build apk --obfuscate --split-per-abi --split-debug-info=./info</span><br></pre></td></tr></table></figure>
+
+<p><code>.apk</code> 路径</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">build/app/outputs/apk/release/app-x86_64-release.apk</span><br><span class="line">build/app/outputs/apk/release/app-armeabi-v7a-release.apk</span><br><span class="line">build/app/outputs/apk/release/app-arm64-v8a-release.apk</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>AAB</code> Build</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">flutter build appbundle --obfuscate --split-debug-info=./info</span><br></pre></td></tr></table></figure>
+
+<p><code>.aab</code> 路径 <code>build/app/outputs/bundle/release/app-release.aab</code></p>
+<h2 id="Github-Action-CI"><a href="#Github-Action-CI" class="headerlink" title="Github Action CI"></a>Github Action CI</h2><h3 id="Secrets"><a href="#Secrets" class="headerlink" title="Secrets"></a>Secrets</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">KEY_ALIAS           <span class="comment"># e.g. key</span></span><br><span class="line">KEY_PASSWORD        <span class="comment"># e.g. xxxxxx</span></span><br><span class="line">KEY_PATH            <span class="comment"># e.g. key.jks</span></span><br><span class="line">KEY_STORE_PASSWORD  <span class="comment"># e.g. xxxxxx</span></span><br><span class="line">PACKAGE_NAME        <span class="comment"># 包名 e.g. com.di1shuai.xxxxx</span></span><br><span class="line">PLAY_JSON           <span class="comment"># e.g. &#123;xxxxxx&#125;</span></span><br><span class="line">SIGNING_KEY         <span class="comment"># 加密key后得到</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>SIGNING_KEY</code> 加密<code>key</code>得到</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl base64 -A -<span class="keyword">in</span> ~/key.jks</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-Action"><a href="#配置-Action" class="headerlink" title="配置 Action"></a>配置 Action</h3><p>路径 <code>.github/workflows/build.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">beta-build</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">tags:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">'*-beta*'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">android-build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/setup-java@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">java-version:</span> <span class="string">'11'</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Cache</span> <span class="string">Flutter</span> <span class="string">Dependencies</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/cache@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">/opt/hostedtoolcache/flutter</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.os</span> <span class="string">&#125;&#125;-flutter</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">subosito/flutter-action@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">channel:</span> <span class="string">'dev'</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Env</span> <span class="string">Init</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">echo</span> <span class="string">"$<span class="template-variable">&#123;&#123; secrets.SIGNING_KEY &#125;&#125;</span>"</span> <span class="string">|</span> <span class="string">base64</span> <span class="string">--decode</span> <span class="string">&gt;</span> <span class="string">android/app/$&#123;&#123;secrets.KEY_PATH&#125;&#125;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">AAB/APK</span> <span class="string">Build</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">flutter</span> <span class="string">build</span> <span class="string">appbundle</span> <span class="string">--obfuscate</span> <span class="string">--split-debug-info=./info</span></span><br><span class="line">          <span class="string">flutter</span> <span class="string">build</span> <span class="string">apk</span> <span class="string">--obfuscate</span> <span class="string">--split-per-abi</span> <span class="string">--split-debug-info=./info</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">KEY_STORE_PASSWORD:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.KEY_STORE_PASSWORD</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">KEY_PASSWORD:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.KEY_PASSWORD</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">KEY_ALIAS:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.KEY_ALIAS</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">KEY_PATH:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.KEY_PATH</span> <span class="string">&#125;&#125;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Push</span> <span class="string">AAB/APK</span> <span class="string">Github</span> <span class="string">Releases</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">ncipollo/release-action@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">artifacts:</span> <span class="string">"build/app/outputs/bundle/release/app-release.aab,build/app/outputs/apk/release/*.apk"</span></span><br><span class="line">          <span class="attr">token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Upload</span> <span class="string">AAB</span> <span class="string">to</span> <span class="string">Artifact</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/upload-artifact@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">appbundle</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">build/app/outputs/bundle/release/app-release.aab</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">aab-release:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">Release</span> <span class="string">app</span> <span class="string">to</span> <span class="string">beta</span> <span class="string">track</span></span><br><span class="line">    <span class="attr">needs:</span> <span class="string">[</span> <span class="string">android-build</span> <span class="string">]</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Get</span> <span class="string">appbundle</span> <span class="string">from</span> <span class="string">artifacts</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/download-artifact@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">appbundle</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Release</span> <span class="string">app</span> <span class="string">to</span> <span class="string">beta</span> <span class="string">track</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">r0adkll/upload-google-play@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">serviceAccountJsonPlainText:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.PLAY_JSON</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">packageName:</span> <span class="string">$&#123;&#123;secrets.PACKAGE_NAME&#125;&#125;</span></span><br><span class="line">          <span class="attr">releaseFiles:</span> <span class="string">app-release.aab</span></span><br><span class="line">          <span class="attr">track:</span> <span class="string">beta</span></span><br><span class="line">          <span class="attr">whatsNewDirectory:</span> <span class="string">distribution/whatsnew</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Push-Tag"><a href="#Push-Tag" class="headerlink" title="Push Tag"></a>Push Tag</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag 1.0.0-beta1</span><br><span class="line">git push origin 1.0.0-beta1</span><br></pre></td></tr></table></figure>
+
+
+      <script>
+        window.disqusProxy={
+          shortname: 'diyishuai',
+          username: 'di1shuai',
+          server: 'disqus.di1shuai.com',
+          port: 443,
+          adminAvatar: '/avatars/admin-avatar.jpg',
+          identifier: '使用GithubAction发布Flutter项目.html',
+        };
+        window.disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = window.disqusProxy.identifier;
+        };
+      </script></div><div class="post-copyright"><script type="text/javascript" src="/js/copyright.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copyright.css"><p><span>本文标题：</span>使用GithubAction发布Flutter项目-Android</p><p><span>文章作者：</span>Shea</p><p><span>原始链接：</span><a href="/使用GithubAction发布Flutter项目.html">https://di1shuai.com/使用GithubAction发布Flutter项目.html</a><span class="copy-path"><i class="fa fa-clipboard" data-clipboard-text="https://di1shuai.com/使用GithubAction发布Flutter项目.html"></i></span></p><p><span>版权声明：</span>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</p></div><br><div class="tags"><a href="/tags/Flutter/"><i class="fa fa-tag"></i>Flutter</a><a href="/tags/Github/"><i class="fa fa-tag"></i>Github</a></div><div class="post-nav"><a class="pre" href="/docker-compose安装单机Elasticsearch.html">docker-compose安装单机Elasticsearch</a><a class="next" href="/招行积分题.html">招行积分题</a></div>
+      <script src="//cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+      <script src="//cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+      <script src="//cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/blockies-identicon@0.1.0/blockies.min.js"></script>
+      <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+      <div id="disqus_proxy_thread"><script src="/scripts/hexo-disqus-proxy-primary.js" async></script><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'https://di1shuai.com/使用GithubAction发布Flutter项目.html';
+    this.page.identifier = '使用GithubAction发布Flutter项目.html';
+    this.page.title = '使用GithubAction发布Flutter项目-Android';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//diyishuai.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//diyishuai.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://diyishuai.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="https://di1shuai.com"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/emotion/">emotion</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/products/">products</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/Flink数据转换-Transformation.html">Flink-DataStream-Transformations</a></li><li class="post-list-item"><a class="post-list-link" href="/Kubernetes架构.html">Kubernetes架构</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction推送Docker到华为镜像中心.html">使用GithubAction推送Docker到香港华为镜像中心</a></li><li class="post-list-item"><a class="post-list-link" href="/docker-compose安装单机Elasticsearch.html">docker-compose安装单机Elasticsearch</a></li><li class="post-list-item"><a class="post-list-link" href="/使用GithubAction发布Flutter项目.html">使用GithubAction发布Flutter项目-Android</a></li><li class="post-list-item"><a class="post-list-link" href="/招行积分题.html">招行积分题</a></li><li class="post-list-item"><a class="post-list-link" href="/设计模式之行为型.html">设计模式之行为型</a></li><li class="post-list-item"><a class="post-list-link" href="/Java各版本新特性.html">Java各版本新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——分区策略.html">Kafka——分区策略</a></li><li class="post-list-item"><a class="post-list-link" href="/Kafka——Rebalance过程.html">Kafka——Rebalance过程</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.csdn.net/u012373815" title="Abel的博客(大数据、AI专家)" target="_blank">Abel的博客(大数据、AI专家)</a><ul></ul><a href="https://blog.csdn.net/u010416101" title="Sean的博客(大数据、AI专家)" target="_blank">Sean的博客(大数据、AI专家)</a><ul></ul><a href="https://yo-cwj.com/" title="陈文俊的博客(前端专家)" target="_blank">陈文俊的博客(前端专家)</a><ul></ul><a href="https://www.xilanhua-c7.top" title="西蓝花的博客(未知领域专家)" target="_blank">西蓝花的博客(未知领域专家)</a><ul></ul><a href="https://gaojianchao.github.io/learngit/" title="Alan的博客(AI专家)" target="_blank">Alan的博客(AI专家)</a><ul></ul><a href="https://woj.app" title="虾米的蜗居" target="_blank">虾米的蜗居</a><ul></ul><a href="https://blog.mightyherox.me" title="circlehotarux的博客" target="_blank">circlehotarux的博客</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2016-2021 <a href="/." rel="nofollow">第一帅 </a> |&nbsp;<a rel="nofollow" target="_blank" href="https://beian.miit.gov.cn"> 晋ICP备15004021号-1</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.1" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/love.js"></script><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.1"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.1"></script></div></body></html>
